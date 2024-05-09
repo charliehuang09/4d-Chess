@@ -1,8 +1,9 @@
 public class Pawn implements Piece{
     private Position position;
-    private int value = 1;
+    private int value;
     private int player;
     public Pawn(Position position, int player){
+        this.value = 1;
         this.player = player;
         this.position = position;
     }
