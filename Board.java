@@ -43,8 +43,8 @@ public class Board {
         //makes the pawns on teh team 1 and team 3 (blue and green)
         for (int c = 0; c < board[0].length; c++) {
             if (c == 4 || c == 10) {
-                board[0][C];
-                board[13][C];
+                board[0][c];
+                board[13][c];
             }
         }
         //team 0, team 2
