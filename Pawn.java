@@ -43,4 +43,10 @@ public class Pawn implements Piece{
     public int getPlayer(){
         return this.player;
     }
+    /* 
+    @Override
+    public boolean getNull() {
+        return false;
+    }
+    */
 }

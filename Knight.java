@@ -9,6 +9,8 @@ public class Knight implements Piece{
     }
     @Override
     public boolean isValidMove(Position position, Piece[][] board){
+        //I temporarily set this to false so the program would compile, you can get rid
+        return false;
     }
     @Override
     public int getPlayer(){
