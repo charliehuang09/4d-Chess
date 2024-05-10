@@ -36,16 +36,8 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
 
     public void drawMe(Graphics g, int x, int y) {
-        if (black == true) {
-            g.setColor( new Color(62,49,49));
-        } else {
-            g.setColor (new Color(161, 102, 47));
-        }
+        piece.drawMe(g,x,y,black,width, height);
         
-        g.fillRect( x , y, width , height);
-        g.setColor( Color.BLACK);
-        g.drawRect( x, y, width, height);
-        //g.drawString(":" + designator, x+14,y+15);
 
     }
     public int getWidth() {

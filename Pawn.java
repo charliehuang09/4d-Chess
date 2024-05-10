@@ -1,4 +1,6 @@
-public class Pawn implements Piece{
+import java.awt.Graphics;
+import java.awt.Color;
+public class Pawn extends Piece{
     private Position position;
     private int value;
     private int player;
@@ -6,6 +8,11 @@ public class Pawn implements Piece{
         this.value = 1;
         this.player = player;
         this.position = position;
+    }
+    @Override
+    public void drawMe(Graphics g, int x, int y, boolean black, int width, int height) {
+        super.drawMe(g,x,y,black,width, height);
+        //add the pawn image here
     }
     @Override
     public boolean isValidMove(Position position, Piece[][] board){
@@ -39,6 +46,7 @@ public class Pawn implements Piece{
         }
         return false;
     }
+    
     @Override
     public int getPlayer(){
         return this.player;

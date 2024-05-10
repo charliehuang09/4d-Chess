@@ -1,4 +1,4 @@
-public class Knight implements Piece{
+public class Knight extends Piece{
     private Position position;
     private int value;
     private int player;
