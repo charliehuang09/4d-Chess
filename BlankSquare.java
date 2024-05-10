@@ -9,5 +9,9 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
     public int getPlayer() {
         return -1;
     }
+    @Override
+    public boolean isBlank(){
+        return true;
+    }
 
 }

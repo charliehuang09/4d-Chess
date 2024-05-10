@@ -32,5 +32,8 @@ public abstract class Piece {
 
         return dimg;
     }
+    public boolean isBlank(){
+        return false;
+    }
     //public boolean getNull(); //im changing the null system //nevermind, im changning it again
 }

@@ -35,7 +35,20 @@ public class Rook extends Piece{
 
     @Override
     public boolean isValidMove(Position position, Piece[][] board){
-        return false;
+        if (this.position.getX() == position.getX() && this.position.getY() == position.getY()) return false;
+        if (this.position.getX() == position.getX()){
+            for (int i = Math.min(this.position.getY(), position.getY()); i <= Math.max(this.position.getY(), position.getY()); i++){
+                if (this.position.getY() == i || (position.getY() == i && board[this.position.getX()][i].getPlayer() != this.getPlayer())) continue;
+                if (!board[this.position.getX()][i].isBlank()) return false;
+            }
+        }
+        if (this.position.getY() == position.getY()){
+            for (int i = Math.min(this.position.getX(), position.getX()); i <= Math.max(this.position.getX(), position.getX()); i++){
+                if (this.position.getX() == i || (position.getX() == i && board[i][this.position.getX()].getPlayer() != this.getPlayer())) continue;
+                if(!board[i][this.position.getY()].isBlank()) return false;
+            }
+        }
+        return true;
     }
     
     @Override
