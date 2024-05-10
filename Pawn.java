@@ -1,14 +1,8 @@
 import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 public class Pawn extends Piece{
     private Position position;
     private int value;
@@ -34,8 +28,6 @@ public class Pawn extends Piece{
     public void drawMe(Graphics g, int x, int y, boolean black, int width, int height) {
         super.drawMe(g,x,y,black,width, height);
         g.drawImage(this.image, x, y, null);
-        
-        //add the pawn image here
     }
     @Override
     public boolean isValidMove(Position position, Piece[][] board){

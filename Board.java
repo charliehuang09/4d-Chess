@@ -9,7 +9,8 @@ public class Board {
 
         nullify();
 
-        board[8][8].setPiece(new Pawn(new Position(8, 8), 0));
+        board[8][8].setPiece(new Pawn(new Position(8, 8), 2));
+        board[9][9].setPiece(new Knight(new Position(9, 9), 0));
 
 
 
