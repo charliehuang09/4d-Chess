@@ -6,7 +6,12 @@ public class Board {
         fillBlank(); //ALWAYS MAKE SURE YOU CALL THIS FIRST BEFORE ALL THE OTHER PIECES
         //pawns(); //adds the pawns onto the board
         //call nullify after setting up the pieces to clean up
-        nullify(); 
+
+        nullify();
+
+        board[8][8].setPiece(new Pawn(new Position(8, 8), 0));
+
+
 
     }
     public void fillBlank() { //fills a grid of blank classes
