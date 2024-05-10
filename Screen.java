@@ -17,18 +17,20 @@ public class Screen extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int x = 450;
+        int x = 450; //the starting positions of the top left corner of the board, including the null squares
         int y = 10;
+
+        int tempX = x;
 
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
-                if (board[r][c].getNull() == false) {
+                if (board[r][c].getNull() == false) { //this draws everything that is not a null square
                     board[r][c].drawMe(g,x,y);
                 }
-                x = x + 50;
+                x = x + board[0][0].getWidth();
             }
-            x = 450;
-            y = y + 50;
+            x = tempX;
+            y = y + board[0][0].getHeight();
         }
         
 

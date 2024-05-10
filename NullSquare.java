@@ -1,4 +1,4 @@
-public class NullSquare implements Piece{
+public class NullSquare implements Piece{ //to represent a null square
     public boolean isValidMove(Position position, Piece[][] board) {
         return false;
     }

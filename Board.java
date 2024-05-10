@@ -3,10 +3,10 @@ public class Board {
     private BoardSquare[][] board;
     public Board() {
         board = new BoardSquare[14][14];
-        fillBlank();
-        pawns(); //adds the pawns onto the board
+        fillBlank(); //ALWAYS MAKE SURE YOU CALL THIS FIRST BEFORE ALL THE OTHER PIECES
+        //pawns(); //adds the pawns onto the board
         //call nullify after setting up the pieces to clean up
-        nullify();
+        nullify(); 
 
     }
     public void fillBlank() { //fills a grid of blank classes
@@ -30,10 +30,10 @@ public class Board {
             alternate = !alternate;
         }
     }
-    public BoardSquare[][] getBoard() {
+    public BoardSquare[][] getBoard() { //returns the board so the screen class can render it
         return board;
     }
-    public void nullify() {
+    public void nullify() { //males all the needed elements need
         //EXPLANATION
         //a method that goes from the board from length to right and makes the need elements in columns = null
         for (int r = 0; r < board.length; r++) { 
@@ -47,7 +47,7 @@ public class Board {
             }
         }   
     }
-    public void pawns() {
+    public void pawns() { //adds the pawns, supposedly 
         //makes the pawns on the team 1 and team 3 (yellow and red) 
         for (int c = 3; c < board[0].length-3; c++) {
 
@@ -62,7 +62,7 @@ public class Board {
         }
     }
     /* //ROOK CLASS
-    public void rook() {
+    public void rook() { //adds the rooks
         
         
         //makes the pawns on teh team 1 and team 3 (blue and green)

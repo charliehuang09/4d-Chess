@@ -7,12 +7,16 @@ public class BoardSquare{ //make a class object for each square to make it easie
     private Piece piece;
     private boolean black;
     private boolean nullSquare;
+    private int width;
+    private int height;
 
 
     public BoardSquare(Piece pieceP, boolean nullS, boolean blackP) {
         black = blackP;
         piece = pieceP;
         nullSquare = nullS;
+        width = 50;
+        height = 50;
 
 
     }
@@ -22,7 +26,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public void setPiece(Piece pass) {
         piece = pass;
     }
-    //only for instantiation when making the board, ignore it 
+    //only for instantiation when making the board, ignore it after instantiation
     public void startUpdate(Piece pieceP, boolean nulls) {
         piece = pieceP;
         nullSquare = nulls;
@@ -38,13 +42,18 @@ public class BoardSquare{ //make a class object for each square to make it easie
             g.setColor (new Color(161, 102, 47));
         }
         
-        g.fillRect( x , y, 50 , 50);
+        g.fillRect( x , y, width , height);
         g.setColor( Color.BLACK);
-        g.drawRect( x, y, 50, 50);
+        g.drawRect( x, y, width, height);
         //g.drawString(":" + designator, x+14,y+15);
 
     }
-    
+    public int getWidth() {
+        return width;
+    }
+    public int getHeight() {
+        return height;
+    }
     
     
 }
