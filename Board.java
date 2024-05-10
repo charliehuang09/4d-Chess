@@ -61,6 +61,27 @@ public class Board {
             board[r][12].startUpdate(new Pawn(new Position(r,12), 2),false);
         }
     }
+    /* 
+    public void knight() { //adds the rooks
+        
+        
+        //makes the pawns on teh team 1 and team 3 (blue and green)
+        for (int c = 0; c < board[0].length; c++) {
+            if (c == 4 || c == 10) {
+                board[0][c].startUpdate(new Knightt(new Position(0,c), 1));
+                board[13][c].startUpdate(new Knight(new Position(13,c), 13));
+            }
+        }
+        //team 0, team 2
+        for (int r = 0; r < board.length; r++) {
+            if (r == 4 || r == 10) {
+                board[r][0].startUpdate(new Knight(new Position(r,0), 0));
+                board[r][13].startUpdate(new Knight(new Position(r,13), 2));
+            }
+        }
+    }
+    */
+
     /* //ROOK CLASS
     public void rook() { //adds the rooks
         
