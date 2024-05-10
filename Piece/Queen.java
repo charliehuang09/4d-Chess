@@ -85,6 +85,39 @@ public class Queen extends Piece{
             y--;
         }
 
+        //diagonal
+        x = this.position.getX() + 1;
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x++;
+            y++;
+        }
+        
+        x = this.position.getX() + 1;
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x++;
+            y--;
+        }
+
+        x = this.position.getX() - 1;
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x--;
+            y++;
+        }
+
+        x = this.position.getX() - 1;
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x--;
+            y--;
+        }
+
         return output;
     }
 }
