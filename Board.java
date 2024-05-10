@@ -1,3 +1,11 @@
+import Piece.Bishop;
+import Piece.King;
+import Piece.Knight;
+import Piece.Pawn;
+import Piece.Position;
+import Piece.Queen;
+import Piece.Rook;
+
 public class Board {
     private BoardSquare[][] board;
     public Board() {

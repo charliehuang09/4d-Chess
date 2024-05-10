@@ -1,5 +1,7 @@
 import java.awt.Graphics;
 
+import Piece.Piece;
+
 
 
 public class BoardSquare{ //make a class object for each square to make it easier to draw, can explain in person 

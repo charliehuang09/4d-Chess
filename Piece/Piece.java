@@ -1,3 +1,4 @@
+package Piece;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 public abstract class Piece {
