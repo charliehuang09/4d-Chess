@@ -17,7 +17,7 @@ public class Screen extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int x = 450; //the starting positions of the top left corner of the board, including the null squares
+        int x = 200; //the starting positions of the top left corner of the board, including the null squares
         int y = 10;
 
         int tempX = x;
