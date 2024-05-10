@@ -1,22 +1,22 @@
+package Piece;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 
 import javax.imageio.ImageIO;
 
-public class Knight extends Piece{
+public class King extends Piece{
     private Position position;
     private int value;
     private int player;
     private String name;
     private BufferedImage image;
-    public Knight(Position position, int player){
+    public King(Position position, int player){
         this.value = 3;
         this.player = player;
         this.position = position;
-        this.name = "Knight";
+        this.name = "King";
 
         String[] teams = new String[] {"Blue", "Green", "Red", "Yellow"};
         String path = "Assets" + "/" + teams[player] + "/" + this.name + ".png";

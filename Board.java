@@ -1,4 +1,11 @@
-import java.awt.Graphics;
+import Piece.Bishop;
+import Piece.King;
+import Piece.Knight;
+import Piece.Pawn;
+import Piece.Position;
+import Piece.Queen;
+import Piece.Rook;
+
 public class Board {
     private BoardSquare[][] board;
     public Board() {
@@ -9,8 +16,12 @@ public class Board {
 
         nullify();
 
+        board[5][5].setPiece(new Queen(new Position(5, 5), 3));
+        board[6][6].setPiece(new King(new Position(6, 6), 2));
+        board[7][7].setPiece(new Bishop(new Position(7, 7), 2));
         board[8][8].setPiece(new Pawn(new Position(8, 8), 2));
         board[9][9].setPiece(new Knight(new Position(9, 9), 0));
+        board[10][10].setPiece(new Rook(new Position(10, 10), 1));
 
 
 
