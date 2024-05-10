@@ -11,7 +11,7 @@ public class Board {
     public Board() {
         board = new BoardSquare[14][14];
         fillBlank(); //ALWAYS MAKE SURE YOU CALL THIS FIRST BEFORE ALL THE OTHER PIECES
-        //pawns(); //adds the pawns onto the board
+        pawns(); //adds the pawns onto the board
         //call nullify after setting up the pieces to clean up
 
         nullify();
