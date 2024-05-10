@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -35,11 +36,55 @@ public class Queen extends Piece{
 
     @Override
     public boolean isValidMove(Position position, Piece[][] board){
+        ArrayList<Position> moves = getValidMoves(board);
+        for (Position move : moves){
+            if (move.getX() == position.getX() && move.getY() == position.getY()) return true;
+        }
         return false;
     }
     
     @Override
     public int getPlayer(){
         return this.player;
+    }
+
+    public ArrayList<Position> getValidMoves(Piece[][] board){
+        ArrayList<Position> output = new ArrayList<Position>();
+        int x;
+        int y;
+
+        //up
+        x = this.position.getX() - 1;
+        y = this.position.getY();
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x--;
+        }
+
+        //down
+        x = this.position.getX() + 1;
+        y = this.position.getY();
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            x++;
+        }
+
+        //right
+        x = this.position.getX();
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            y++;
+        }
+
+        //left
+        x = this.position.getX();
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board)){
+            output.add(new Position(x, y));
+            y--;
+        }
+
+        return output;
     }
 }
