@@ -26,8 +26,8 @@ public class Pawn extends Piece{
         this.image = super.resize(image);
     }
     @Override
-    public void drawMe(Graphics g, int x, int y, boolean black, int width, int height) {
-        super.drawMe(g,x,y,black,width, height);
+    public void drawMe(Graphics g, int x, int y, boolean black, boolean select, int width, int height) {
+        super.drawMe(g,x,y,black, select, width, height);
         g.drawImage(this.image, x, y, null);
     }
     @Override
