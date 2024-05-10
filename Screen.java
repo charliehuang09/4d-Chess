@@ -3,9 +3,11 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+import Piece.Position;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;
     private BoardSquare[][] board;
+    
     private int x;
     private int y;
     public Screen() {
@@ -66,9 +68,11 @@ public class Screen extends JPanel implements MouseListener{
         int mX = e.getX();
         int mY = e.getY();
         //Print location of x and y
-        System.out.println("X: " + mX + ", Y: " + mY);
-
-        
+        System.out.println("Clicked X: " + mX + ", Y: " + mY);
+        Position pos = returnLocation(mX, mY);
+        if (pos != null) {
+            board[pos.getX()][pos.getY()].changeSelect();
+        }
         repaint();
     }
 
@@ -76,7 +80,9 @@ public class Screen extends JPanel implements MouseListener{
     public void mouseReleased(MouseEvent e) {}
 
 
-    public void mouseEntered(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {
+        
+    }
 
 
     public void mouseExited(MouseEvent e) {}

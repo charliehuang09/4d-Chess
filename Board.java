@@ -26,21 +26,24 @@ public class Board {
 
 
     }
+    public void setSelect(Position pass) {
+        //board[pass.getX()][pass.getY()].changeSelect();
+    }
     public void fillBlank() { //fills a grid of blank classes
         boolean alternate = false;
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c ++) {
                 if (alternate == false) {
                     if ((c+1) % 2 == 0) {
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, true);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, true);
                     } else if((c+1) % 2 == 1){
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, false);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, false);
                     }
                 } else {
                     if ((c+1) % 2 == 0) {
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, false);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false,false,  false);
                     } else if ((c+1) % 2 == 1){
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, true);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, true);
                     }
                 }
             }

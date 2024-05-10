@@ -7,19 +7,24 @@ import Piece.Piece;
 public class BoardSquare{ //make a class object for each square to make it easier to draw, can explain in person 
     private Piece piece;
     private boolean black;
+    private boolean select;
     private boolean nullSquare;
     private int width;
     private int height;
 
 
-    public BoardSquare(Piece pieceP, boolean nullS, boolean blackP) {
+    public BoardSquare(Piece pieceP, boolean nullS, boolean selectP, boolean blackP) {
         black = blackP;
+        select = selectP;
         piece = pieceP;
         nullSquare = nullS;
         width = 50;
         height = 50;
 
 
+    }
+    public void changeSelect() {
+        select = !select;
     }
     public boolean getNull() {
         return nullSquare;
@@ -37,7 +42,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
 
     public void drawMe(Graphics g, int x, int y) {
-        piece.drawMe(g,x,y,black,width, height);
+        piece.drawMe(g,x,y,black, select, width, height);
         
 
     }

@@ -25,7 +25,7 @@ public class King extends Piece{
         } catch (IOException e) {
             System.out.println("Failed");
         }
-        this.image = super.reszie(image);
+        this.image = super.resize(image);
     }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, int width, int height) {
