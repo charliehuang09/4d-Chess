@@ -23,4 +23,9 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {}
 
+    @Override
+    public int getValue(){
+        return -1;
+    }
+
 }

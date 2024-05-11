@@ -103,4 +103,8 @@ public class Rook extends Piece{
     public Position getPosition(){
         return position;
     }
+    @Override
+    public int getValue(){
+        return this.value;
+    }
 }

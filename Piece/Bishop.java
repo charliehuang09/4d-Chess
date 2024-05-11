@@ -45,9 +45,12 @@ public class Bishop extends Piece{
     public int getPlayer(){
         return this.player;
     }
-
     @Override
     public Position getPosition(){
-        return position;
+        return this.position;
+    }
+    @Override
+    public int getValue(){
+        return this.value;
     }
 }

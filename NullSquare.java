@@ -24,6 +24,12 @@ public class NullSquare extends Piece{ //to represent a null square
     public boolean isBlank(){
         return true;
     }
+    
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {}
+
+    @Override
+    public int getValue(){
+        return -1;
+    }
 }

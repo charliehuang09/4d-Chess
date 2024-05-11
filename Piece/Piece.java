@@ -6,9 +6,7 @@ public abstract class Piece {
     public abstract int getPlayer();
     public abstract Position getPosition();
     public abstract void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board);
-    // public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
-    //     //to be deleted
-    // }
+    public abstract int getValue();
     
     public static BufferedImage resize(BufferedImage image){
         Image temp = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);

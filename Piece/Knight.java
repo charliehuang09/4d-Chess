@@ -51,6 +51,10 @@ public class Knight extends Piece{
     }
     @Override
     public Position getPosition(){
-        return position;
+        return this.position;
+    }
+    @Override
+    public int getValue(){
+        return this.value;
     }
 }
