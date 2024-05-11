@@ -13,7 +13,8 @@ public class NullSquare extends Piece{ //to represent a null square
     public int getPlayer() {
         return -1;
     }
-    public boolean getNull() {
+    @Override
+    public boolean isNull() {
         return true;
     }
     @Override
@@ -22,7 +23,7 @@ public class NullSquare extends Piece{ //to represent a null square
     }
     @Override
     public boolean isBlank(){
-        return true;
+        return false;
     }
     
     @Override

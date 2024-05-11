@@ -74,6 +74,9 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public boolean isBlank(){
         return piece.isBlank();
     }
+    public boolean isNull(){
+        return piece.isNull();
+    }
     
     
 }

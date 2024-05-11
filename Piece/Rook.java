@@ -29,6 +29,10 @@ public class Rook extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public boolean isNull() {
+        return false;
+    }
+    @Override
     public boolean isBlank(){
         return false;
     }

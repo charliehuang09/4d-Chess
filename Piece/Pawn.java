@@ -41,13 +41,17 @@ public class Pawn extends Piece{
         //diagonal capture
         dx = new int[]{-1, 1,  1, -1};
         dy = new int[]{ 1, 1, -1, -1};
-        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player)output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
+        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player && !board[position.getX() + dx[player]][position.getY() + dy[player]].isNull())output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
 
         dx = new int[]{1, 1,  -1, -1};
         dy = new int[]{1, -1, -1,  1};
-        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player)output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
+        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player && !board[position.getX() + dx[player]][position.getY() + dy[player]].isNull())output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
 
         return output;
+    }
+    @Override
+    public boolean isNull() {
+        return false;
     }
     @Override
     public boolean isBlank(){

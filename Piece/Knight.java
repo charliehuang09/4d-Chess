@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -28,14 +29,33 @@ public class Knight extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public boolean isNull() {
+        return false;
+    }
+    @Override
     public boolean isBlank(){
         return false;
     }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
+        if (select == "current"){
+            ArrayList<Position> moves = getValidMoves(board);
+
+            for (Position move : moves){
+                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+            }
+        }
         g.drawImage(this.image, x, y, null);
     }
-
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+        int[] dx = new int[]{2, 2, -2, -2, -1, 1, -1, 1};
+        int[] dy = new int[]{-1, 1, -1, 1, 2, 2, -2, -2};
+        ArrayList<Position> output = new ArrayList<Position>();
+        for (int i = 0; i < 8; i++){
+                if (inBound(this.position.getX() + dx[i], this.position.getY() + dy[i], board) && !board[this.position.getX() + dx[i]][this.position.getY() + dy[i]].isNull() && board[this.position.getX() + dx[i]][this.position.getY() + dy[i]].getPlayer() != player) output.add(new Position(this.position.getX() + dx[i], this.position.getY() + dy[i]));
+        }
+        return output;
+    }
     @Override
     public boolean isValidMove(Position position, BoardSquare[][] board){
         int[] dx = new int[]{2, 2, -2, -2, -1, 1, -1, 1};

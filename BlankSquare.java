@@ -8,6 +8,10 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
     public boolean isValidMove(Position position, BoardSquare[][] board) {
         return false;
     }
+    @Override
+    public boolean isNull() {
+        return false;
+    }
     public int getPlayer() {
         return -1;
     }
