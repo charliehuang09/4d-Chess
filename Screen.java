@@ -3,6 +3,8 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
+
+import Piece.BoardSquare;
 import Piece.Position;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;

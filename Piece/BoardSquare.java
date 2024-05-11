@@ -1,6 +1,5 @@
+package Piece;
 import java.awt.Graphics;
-
-import Piece.Piece;
 
 
 

@@ -1,4 +1,5 @@
 import Piece.Bishop;
+import Piece.BoardSquare;
 import Piece.King;
 import Piece.Knight;
 import Piece.Pawn;
