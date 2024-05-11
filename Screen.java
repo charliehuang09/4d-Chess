@@ -7,14 +7,17 @@ import Piece.Position;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;
     private BoardSquare[][] board;
-    
     private int x;
     private int y;
+    private int tempX;
+    private int tempY;
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
-        x = 200;
+        x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
+        tempX = x;
+        tempY = y;
         addMouseListener(this);
     }
     public Dimension getPreferredSize(){
@@ -23,9 +26,6 @@ public class Screen extends JPanel implements MouseListener{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        int tempX = x;
-        int tempY = y;
 
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
@@ -43,18 +43,16 @@ public class Screen extends JPanel implements MouseListener{
 
     }
 
-    public Position returnLocation(int mX, int mY) {
-        int tempX = x;
-        int tempY = y;
+    public Position returnLocation(int mX, int mY) { //goes through every single index and if the mouse coordinates are within the rnages, it returns the position
+        x = tempX;
+        y = tempY;
         Position location = null;
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[r].length; c++) {
-                if ((x <= mX && mX <= (x + board[0][0].getWidth())) && (y <= mY && mY <= (y + x+board[0][0].getHeight()))) {
+                if ((x <= mX && mX <= (x + board[0][0].getWidth())) && (y <= mY && mY <= (y + board[0][0].getHeight()))) {
                     location = new Position(r,c);
-                } else {
-                    
-                    x = x + x + board[0][0].getWidth();
                 }
+                x = x + board[0][0].getWidth();
             }
             x = tempX;
             y = y + board[0][0].getHeight();
@@ -72,6 +70,8 @@ public class Screen extends JPanel implements MouseListener{
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
             board[pos.getX()][pos.getY()].changeSelect();
+        } else {
+            System.out.println("Position is null");
         }
         repaint();
     }
@@ -80,10 +80,7 @@ public class Screen extends JPanel implements MouseListener{
     public void mouseReleased(MouseEvent e) {}
 
 
-    public void mouseEntered(MouseEvent e) {
-        
-    }
-
+    public void mouseEntered(MouseEvent e) {}
 
     public void mouseExited(MouseEvent e) {}
 

@@ -12,17 +12,22 @@ public class Board {
         board = new BoardSquare[14][14];
         fillBlank(); //ALWAYS MAKE SURE YOU CALL THIS FIRST BEFORE ALL THE OTHER PIECES
         pawns(); //adds the pawns onto the board
+        rook();
+        knight();
+        bishop();
+        king();
+        queen();
         //call nullify after setting up the pieces to clean up
 
         nullify();
-
+        /* 
         board[5][5].setPiece(new Queen(new Position(5, 5), 3));
         board[6][6].setPiece(new King(new Position(6, 6), 2));
         board[7][7].setPiece(new Bishop(new Position(7, 7), 2));
         board[8][8].setPiece(new Pawn(new Position(8, 8), 2));
         board[9][9].setPiece(new Knight(new Position(9, 9), 0));
         board[10][10].setPiece(new Rook(new Position(10, 10), 1));
-
+        */
 
 
     }
@@ -81,47 +86,102 @@ public class Board {
             board[r][12].startUpdate(new Pawn(new Position(r,12), 2),false);
         }
     }
-    /* 
-    public void knight() { //adds the rooks
+     
+    public void knight() { //adds the knights
         
         
         //makes the pawns on teh team 1 and team 3 (blue and green)
         for (int c = 0; c < board[0].length; c++) {
-            if (c == 4 || c == 10) {
-                board[0][c].startUpdate(new Knightt(new Position(0,c), 1));
-                board[13][c].startUpdate(new Knight(new Position(13,c), 13));
+            if (c == 4 || c == 9) {
+                board[0][c].startUpdate(new Knight(new Position(0,c), 1),false);
+                board[13][c].startUpdate(new Knight(new Position(13,c), 3),false);
             }
         }
         //team 0, team 2
         for (int r = 0; r < board.length; r++) {
-            if (r == 4 || r == 10) {
-                board[r][0].startUpdate(new Knight(new Position(r,0), 0));
-                board[r][13].startUpdate(new Knight(new Position(r,13), 2));
+            if (r == 4 || r == 9) {
+                board[r][0].startUpdate(new Knight(new Position(r,0), 0),false);
+                board[r][13].startUpdate(new Knight(new Position(r,13), 2),false);
             }
         }
     }
-    */
+    public void bishop() { //adds the bishop
+        
+        
+        //makes the pawns on teh team 1 and team 3 (blue and green)
+        for (int c = 0; c < board[0].length; c++) {
+            if (c == 5 || c == 8) {
+                board[0][c].startUpdate(new Bishop(new Position(0,c), 1),false);
+                board[13][c].startUpdate(new Bishop(new Position(13,c), 3),false);
+            }
+        }
+        //team 0, team 2
+        for (int r = 0; r < board.length; r++) {
+            if (r == 5 || r == 8) {
+                board[r][0].startUpdate(new Bishop(new Position(r,0), 0),false);
+                board[r][13].startUpdate(new Bishop(new Position(r,13), 2),false);
+            }
+        }
+    }
 
-    /* //ROOK CLASS
+    public void king() { //adds the kings
+        
+        
+        //makes the pawns on teh team 1 and team 3 (blue and green)
+        for (int c = 0; c < board[0].length; c++) {
+            if (c == 6) {
+                board[0][c].startUpdate(new King(new Position(0,c), 1),false);
+                board[13][c].startUpdate(new King(new Position(13,c), 3),false);
+            }
+        }
+        //team 0, team 2
+        for (int r = 0; r < board.length; r++) {
+            if (r == 6) {
+                board[r][0].startUpdate(new King(new Position(r,0), 0),false);
+                board[r][13].startUpdate(new King(new Position(r,13), 2),false);
+            }
+        }
+    }
+    
+    public void queen() { //adds the kings
+        
+        
+        //makes the pawns on teh team 1 and team 3 (blue and green)
+        for (int c = 0; c < board[0].length; c++) {
+            if (c == 7) {
+                board[0][c].startUpdate(new Queen(new Position(0,c), 1),false);
+                board[13][c].startUpdate(new Queen(new Position(13,c), 3),false);
+            }
+        }
+        //team 0, team 2
+        for (int r = 0; r < board.length; r++) {
+            if (r == 7) {
+                board[r][0].startUpdate(new Queen(new Position(r,0), 0),false);
+                board[r][13].startUpdate(new Queen(new Position(r,13), 2),false);
+            }
+        }
+    }
+
+    //ROOK CLASS
     public void rook() { //adds the rooks
         
         
         //makes the pawns on teh team 1 and team 3 (blue and green)
         for (int c = 0; c < board[0].length; c++) {
-            if (c == 4 || c == 10) {
-                board[0][c].startUpdate(new Rook(new Position(0,c), 1));
-                board[13][c].startUpdate(new Rook(new Position(13,c), 13));
+            if (c == 3 || c == 10) {
+                board[0][c].startUpdate(new Rook(new Position(0,c), 1),false);
+                board[13][c].startUpdate(new Rook(new Position(13,c), 3),false);
             }
         }
         //team 0, team 2
         for (int r = 0; r < board.length; r++) {
-            if (r == 4 || r == 10) {
-                board[r][0].startUpdate(new Rook(new Position(r,0), 0));
-                board[r][13].startUpdate(new Rook(new Position(r,13), 2));
+            if (r == 3 || r == 10) {
+                board[r][0].startUpdate(new Rook(new Position(r,0), 0),false);
+                board[r][13].startUpdate(new Rook(new Position(r,13), 2),false);
             }
         }
     }
-    */
+    
 
 
 
