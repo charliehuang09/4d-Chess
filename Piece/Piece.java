@@ -16,6 +16,7 @@ public abstract class Piece {
             ArrayList<Position> moves = getValidMoves(board);
 
             for (Position move : moves){
+                System.out.println(move);
                 g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
             }
         }

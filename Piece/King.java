@@ -28,8 +28,14 @@ public class King extends Piece{
         }
         this.image = super.resize(image);
     }
-    @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+    @Override
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
+        int[] dx = new int[]{1, -1, 0, 0, 1, 1, -1, -1};
+        int[] dy = new int[]{0, 0, 1, -1, -1, 1, 1, -1};
+        for (int i = 0; i < 8; i++){
+            if (super.inBound(position.getX() + dx[i], position.getY() + dy[i], board) && !board[position.getX() + dx[i]][position.getY() + dy[i]].isNull() && board[position.getX() + dx[i]][position.getY() + dy[i]].getPlayer() != player) output.add(new Position(position.getX() + dx[i], position.getY() + dy[i]));
+        }
         return output;
     }
     @Override

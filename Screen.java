@@ -7,7 +7,9 @@ import java.awt.event.MouseEvent;
 import Piece.Bishop;
 import Piece.BoardSquare;
 import Piece.Position;
+import Piece.Queen;
 import Piece.Rook;
+import Piece.King;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;
     private BoardSquare[][] board;
@@ -21,6 +23,8 @@ public class Screen extends JPanel implements MouseListener{
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
+        board[6][6].setPiece(new King(new Position(6, 6), 0));
+        board[6][7].setPiece(new Queen(new Position(6, 7), 0));
         board[8][8].setPiece(new Rook(new Position(8, 8), 0));
         board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS

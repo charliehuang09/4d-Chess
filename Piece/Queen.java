@@ -63,67 +63,75 @@ public class Queen extends Piece{
         //up
         x = this.position.getX() - 1;
         y = this.position.getY();
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //down
         x = this.position.getX() + 1;
         y = this.position.getY();
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //right
         x = this.position.getX();
         y = this.position.getY() + 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             y++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //left
         x = this.position.getX();
         y = this.position.getY() - 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             y--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //diagonal
         x = this.position.getX() + 1;
         y = this.position.getY() + 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x++;
             y++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
         
         x = this.position.getX() + 1;
         y = this.position.getY() - 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x++;
             y--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         x = this.position.getX() - 1;
         y = this.position.getY() + 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x--;
             y++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         x = this.position.getX() - 1;
         y = this.position.getY() - 1;
-        while(super.inBound(x, y, board)){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x--;
             y--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         return output;
     }
