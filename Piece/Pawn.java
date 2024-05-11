@@ -55,7 +55,6 @@ public class Pawn extends Piece{
     }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
-        super.drawMe(g,x,y,black, select, width, height, board);
         if (select == "current"){
             ArrayList<Position> moves = getValidMoves(board);
 

@@ -5,9 +5,10 @@ public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
     public abstract Position getPosition();
-    public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
-        //to be deleted
-    }
+    public abstract void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board);
+    // public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
+    //     //to be deleted
+    // }
     
     public static BufferedImage resize(BufferedImage image){
         Image temp = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);

@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 import Piece.BoardSquare;
 import Piece.Piece;
 import Piece.Position;
@@ -22,4 +24,6 @@ public class NullSquare extends Piece{ //to represent a null square
     public boolean isBlank(){
         return true;
     }
+    @Override
+    public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {}
 }

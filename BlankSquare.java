@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 import Piece.BoardSquare;
 import Piece.Piece;
 import Piece.Position;
@@ -18,5 +20,7 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
     public Position getPosition(){
         return null;
     }
+    @Override
+    public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {}
 
 }
