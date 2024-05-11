@@ -36,11 +36,55 @@ public class Rook extends Piece{
     public boolean isBlank(){
         return false;
     }
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+        ArrayList<Position> output = new ArrayList<Position>();
+        int x;
+        int y;
+
+        //up
+        x = this.position.getX() - 1;
+        y = this.position.getY();
+        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+            output.add(new Position(x, y));
+            x--;
+        }
+
+        //down
+        x = this.position.getX() + 1;
+        y = this.position.getY();
+        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+            output.add(new Position(x, y));
+            x++;
+        }
+
+        //right
+        x = this.position.getX();
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+            output.add(new Position(x, y));
+            y++;
+        }
+
+        //left
+        x = this.position.getX();
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+            output.add(new Position(x, y));
+            y--;
+        }
+        return output;
+    }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
+        if (select == "current"){
+            ArrayList<Position> moves = getValidMoves(board);
+
+            for (Position move : moves){
+                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+            }
+        }
         g.drawImage(this.image, x, y, null);
     }
-
     @Override
     public boolean isValidMove(Position position, BoardSquare[][] board){
         if (this.position.getX() == position.getX() && this.position.getY() == position.getY()) return false;
@@ -64,45 +108,6 @@ public class Rook extends Piece{
         return this.player;
     }
 
-    
-    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
-        ArrayList<Position> output = new ArrayList<Position>();
-        int x;
-        int y;
-
-        //up
-        x = this.position.getX() - 1;
-        y = this.position.getY();
-        while(super.inBound(x, y, board)){
-            output.add(new Position(x, y));
-            x--;
-        }
-
-        //down
-        x = this.position.getX() + 1;
-        y = this.position.getY();
-        while(super.inBound(x, y, board)){
-            output.add(new Position(x, y));
-            x++;
-        }
-
-        //right
-        x = this.position.getX();
-        y = this.position.getY() + 1;
-        while(super.inBound(x, y, board)){
-            output.add(new Position(x, y));
-            y++;
-        }
-
-        //left
-        x = this.position.getX();
-        y = this.position.getY() - 1;
-        while(super.inBound(x, y, board)){
-            output.add(new Position(x, y));
-            y--;
-        }
-        return output;
-    }
     @Override
     public Position getPosition(){
         return position;

@@ -20,7 +20,7 @@ public class Screen extends JPanel implements MouseListener{
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
-        board[11][8].setPiece(new Rook(new Position(8, 8), 0));
+        board[11][8].setPiece(new Rook(new Position(11, 8), 0));
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
         tempX = x;
