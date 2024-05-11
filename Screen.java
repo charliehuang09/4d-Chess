@@ -98,9 +98,11 @@ public class Screen extends JPanel implements MouseListener{
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
 
-                    Piece currPiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
-                    board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
-                    board[nextSelect.getX()][nextSelect.getY()].setPiece(currPiece);
+                    // Piece currPiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
+                    // board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
+                    // board[nextSelect.getX()][nextSelect.getY()].setPiece(currPiece);
+                    board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
+                    board[currentSelect.getX()][currentSelect.getY()].setPiece(new NullSquare());
 
                     System.out.println(board[currentSelect.getX()][currentSelect.getY()].getName() + " moved from: (" + currentSelect.getX() + "," + currentSelect.getY() + ") to (" + nextSelect.getX() + "," + nextSelect.getY() + ")");
                     
