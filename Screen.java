@@ -4,6 +4,9 @@ import java.awt.Dimension;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 import Piece.Bishop;
 import Piece.BoardSquare;
@@ -22,6 +25,10 @@ public class Screen extends JPanel implements MouseListener{
     private Position currentSelect;
     private Position nextSelect;
     private int[] points;
+    private JLabel player2Score;
+    private JLabel player3Score;
+    private JLabel player2Score;
+    private JLabel player1Score;
     public Screen() {
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
@@ -37,6 +44,35 @@ public class Screen extends JPanel implements MouseListener{
         currentSelect = null;
         nextSelect = null;
         addMouseListener(this);
+        
+        player2Score = new JLabel();
+player2Score.setFont(new Font("Arial", Font.BOLD, 20));
+player2Score.setHorizontalAlignment(SwingConstants.CENTER);
+player2Score.setBounds(296, 258, 200, 30);
+player2Score.setText("label");
+this.add(player2Score);
+
+player3Score = new JLabel();
+player3Score.setFont(new Font("Arial", Font.BOLD, 20));
+player3Score.setHorizontalAlignment(SwingConstants.CENTER);
+player3Score.setBounds(614, 656, 200, 30);
+player3Score.setText("label");
+this.add(player3Score);
+
+player2Score = new JLabel();
+player2Score.setFont(new Font("Arial", Font.BOLD, 20));
+player2Score.setHorizontalAlignment(SwingConstants.CENTER);
+player2Score.setBounds(1265, 515, 200, 30);
+player2Score.setText("label");
+this.add(player2Score);
+
+player1Score = new JLabel();
+player1Score.setFont(new Font("Arial", Font.BOLD, 20));
+player1Score.setHorizontalAlignment(SwingConstants.CENTER);
+player1Score.setBounds(945, 60, 200, 30);
+player1Score.setText("label");
+this.add(player1Score);
+    
     }
     public Dimension getPreferredSize(){
         return new Dimension(1920,1080);
@@ -97,17 +133,17 @@ public class Screen extends JPanel implements MouseListener{
                 if (move.equals(nextSelect)) {
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
-
                     // Piece currPiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
                     // board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
                     // board[nextSelect.getX()][nextSelect.getY()].setPiece(currPiece);
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
-                    board[currentSelect.getX()][currentSelect.getY()].setPiece(new NullSquare());
+                    board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
 
-                    System.out.println(board[currentSelect.getX()][currentSelect.getY()].getName() + " moved from: (" + currentSelect.getX() + "," + currentSelect.getY() + ") to (" + nextSelect.getX() + "," + nextSelect.getY() + ")");
                     
-                    for (int point : points) System.out.println(point);
-
+                
+                    for (int i = 0; i < points.length; i++) {
+                        System.out.println(i + "has:" + points[i]);
+                    }
                     board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
@@ -147,7 +183,7 @@ public class Screen extends JPanel implements MouseListener{
         } else {
             System.out.println("Position is null");
         }
-        move();
+        move(); //checks if a move has been made and calculates the resulting change
         repaint();
     }
 
