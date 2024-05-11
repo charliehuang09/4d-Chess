@@ -1,6 +1,7 @@
 package Piece;
 import java.awt.Graphics;
-
+import java.awt.image.BufferedImage;
+import java.awt.*;
 
 
 public class BoardSquare{ //make a class object for each square to make it easier to draw, can explain in person 
@@ -38,8 +39,29 @@ public class BoardSquare{ //make a class object for each square to make it easie
         return piece;
     }
 
-    public void drawMe(Graphics g, int x, int y) {
-        piece.drawMe(g,x,y,black, select, width, height);
+    public void drawBoard(Graphics g, int y, int x){
+        if (nullSquare) return;
+        x = x * 50 + 200;
+        y = y * 50 + 10;
+        if (black == true) {
+            g.setColor( new Color(62,49,49));
+        } else {
+            g.setColor (new Color(161, 102, 47));
+        }
+        if (select == "current") {
+            g.setColor (new Color(25, 128, 121));
+        } else if (select == "next") {
+            g.setColor (new Color(245, 239, 86));
+        }
+
+        
+        g.fillRect( x , y, width , height);
+        g.setColor( Color.BLACK);
+        g.drawRect( x, y, width, height);
+    }
+
+    public void drawMe(Graphics g, int x, int y, BoardSquare board[][]) {
+        piece.drawMe(g,x,y,black, select, width, height, board);
     }
     public int getWidth() {
         return width;

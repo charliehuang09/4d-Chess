@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import Piece.BoardSquare;
 import Piece.Position;
+import Piece.Rook;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;
     private BoardSquare[][] board;
@@ -19,6 +20,7 @@ public class Screen extends JPanel implements MouseListener{
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
+        board[11][8].setPiece(new Rook(new Position(8, 8), 0));
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
         tempX = x;
@@ -34,10 +36,16 @@ public class Screen extends JPanel implements MouseListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                board[i][j].drawBoard(g, i, j);
+            }
+        }
+
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if (board[r][c].getNull() == false) { //this draws everything that is not a null square
-                    board[r][c].drawMe(g,x,y);
+                    board[r][c].drawMe(g, x, y, board);
                 }
                 x = x + board[0][0].getWidth();
             }

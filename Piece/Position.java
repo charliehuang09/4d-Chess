@@ -12,7 +12,16 @@ public class Position {
     public int getY(){
         return this.y;
     }
+    public int getCoordX(){
+        return this.x * 50 + 10 + 20;
+    }
+    public int getCoordY(){
+        return this.y * 50 + 200 + 20;
+    }
     public String toString(){
         return "X: " + this.x + " Y: " + this.y;
+    }
+    public boolean equals(Position position){
+        return this.getX() == position.getX() && this.getY() == position.getY();
     }
 }
