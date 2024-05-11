@@ -1,5 +1,4 @@
 package Piece;
-import java.awt.Graphics;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -21,6 +20,13 @@ public class BoardSquare{ //make a class object for each square to make it easie
         width = 50;
         height = 50;
     }
+    private boolean doPawnPromotion(){
+        if (piece.getName() != "Pawn") return false;
+        int[] dx = new int[] {-1, 7, -1, 6};
+        int[] dy = new int[] {7, -1, 6, -1};
+        if (piece.getPosition().getX() == dx[piece.getPlayer()] || piece.getPosition().getY() == dy[piece.getPlayer()]) return true;
+        return false;
+    }
     public boolean returnValidMoves(Position position, BoardSquare[][] board) {
         return piece.isValidMove(position,board);
     }
@@ -29,6 +35,9 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
     public void updatePosition(Position pos) {
         piece.updatePos(pos);
+        if (doPawnPromotion()){
+            piece = new Queen(piece.getPosition(), piece.getPlayer(), 1);
+        }
     }
     public void changeSelect(String pass) {
         select = pass;
