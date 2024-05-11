@@ -14,7 +14,7 @@ public class Rook extends Piece{
     private String name;
     private BufferedImage image;
     public Rook(Position position, int player){
-        this.value = 3;
+        this.value = 5;
         this.player = player;
         this.position = position;
         this.name = "Rook";

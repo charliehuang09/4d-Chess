@@ -42,7 +42,7 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
 
     @Override
     public int getValue(){
-        return -1;
+        return 0;
     }
 
 }

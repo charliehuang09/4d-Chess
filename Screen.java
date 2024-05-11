@@ -21,7 +21,9 @@ public class Screen extends JPanel implements MouseListener{
     private int tempY;
     private Position currentSelect;
     private Position nextSelect;
+    private int[] points;
     public Screen() {
+        points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
         board = boardClass.getBoard();
         board[6][6].setPiece(new King(new Position(6, 6), 0));
@@ -93,11 +95,17 @@ public class Screen extends JPanel implements MouseListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect)) {
+                    points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
-                    Piece temp = board[currentSelect.getX()][currentSelect.getY()].getPiece();
+
+                    Piece currPiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
-                    board[nextSelect.getX()][nextSelect.getY()].setPiece(temp);
+                    board[nextSelect.getX()][nextSelect.getY()].setPiece(currPiece);
+
                     System.out.println(board[currentSelect.getX()][currentSelect.getY()].getName() + " moved from: (" + currentSelect.getX() + "," + currentSelect.getY() + ") to (" + nextSelect.getX() + "," + nextSelect.getY() + ")");
+                    
+                    for (int point : points) System.out.println(point);
+
                     board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");

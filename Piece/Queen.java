@@ -14,7 +14,7 @@ public class Queen extends Piece{
     private String name;
     private BufferedImage image;
     public Queen(Position position, int player){
-        this.value = 3;
+        this.value = 9;
         this.player = player;
         this.position = position;
         this.name = "Queen";

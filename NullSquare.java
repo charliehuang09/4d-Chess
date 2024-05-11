@@ -45,6 +45,6 @@ public class NullSquare extends Piece{ //to represent a null square
 
     @Override
     public int getValue(){
-        return -1;
+        return 0;
     }
 }

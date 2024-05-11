@@ -97,5 +97,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public void move(){
         this.piece.move();
     }
-    
+    public int getValue(){
+        return this.piece.getValue();
+    }
 }

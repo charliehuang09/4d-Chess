@@ -22,6 +22,7 @@ public class Position {
         return "X: " + this.x + " Y: " + this.y;
     }
     public boolean equals(Position position){
+        if (position == null) return false;
         return this.getX() == position.getX() && this.getY() == position.getY();
     }
 }
