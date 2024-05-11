@@ -44,6 +44,6 @@ public class King extends Piece{
     }
     @Override
     public Position getPosition(){
-        return this.getPosition();
+        return position;
     }
 }

@@ -45,6 +45,6 @@ public class Bishop extends Piece{
 
     @Override
     public Position getPosition(){
-        return this.getPosition();
+        return position;
     }
 }

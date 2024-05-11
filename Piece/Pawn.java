@@ -68,6 +68,6 @@ public class Pawn extends Piece{
     }
     @Override
     public Position getPosition(){
-        return this.getPosition();
+        return this.position;
     }
 }

@@ -122,6 +122,6 @@ public class Queen extends Piece{
     }
     @Override
     public Position getPosition(){
-        return this.getPosition();
+        return position;
     }
 }
