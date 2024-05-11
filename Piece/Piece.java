@@ -47,5 +47,6 @@ public abstract class Piece {
         if (y >= board[0].length) return false;
         return true;
     }
+    public void move() { }
     
 }

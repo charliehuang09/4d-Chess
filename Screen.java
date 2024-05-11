@@ -89,11 +89,11 @@ public class Screen extends JPanel implements MouseListener{
         return location;
     }
     public void move() { //current only for moving to empty sqaures
-        
         if (nextSelect != null) {
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect)) {
+                    board[currentSelect.getX()][currentSelect.getY()].move();
                     Piece temp = board[currentSelect.getX()][currentSelect.getY()].getPiece();
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(temp);

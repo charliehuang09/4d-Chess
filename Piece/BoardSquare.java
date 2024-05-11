@@ -92,8 +92,10 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
     
     public void drawMoves(Graphics g, BoardSquare[][] board){
-        piece.drawMoves(g, select, board);
+        this.piece.drawMoves(g, select, board);
     }
-    
+    public void move(){
+        this.piece.move();
+    }
     
 }

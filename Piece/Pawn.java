@@ -90,4 +90,8 @@ public class Pawn extends Piece{
     public int getValue(){
         return this.value;
     }
+    @Override 
+    public void move(){
+        startingPos = false;
+    }
 }
