@@ -40,6 +40,7 @@ public class Knight extends Piece{
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
         g.drawImage(this.image, x, y, null);
     }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         int[] dx = new int[]{2, 2, -2, -2, -1, 1, -1, 1};
         int[] dy = new int[]{-1, 1, -1, 1, 2, 2, -2, -2};

@@ -36,6 +36,7 @@ public class Rook extends Piece{
     public boolean isBlank(){
         return false;
     }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int x;

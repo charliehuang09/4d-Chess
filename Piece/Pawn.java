@@ -29,6 +29,7 @@ public class Pawn extends Piece{
         }
         this.image = super.resize(image);
     }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int[] dx = new int[]{0, 1, 0, -1};

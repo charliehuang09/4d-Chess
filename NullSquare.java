@@ -14,7 +14,8 @@ public class NullSquare extends Piece{ //to represent a null square
     public int getPlayer() {
         return -1;
     }
-    @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+    @Override
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         return output;
     }
