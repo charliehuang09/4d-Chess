@@ -66,10 +66,4 @@ public class Pawn extends Piece{
     public int getPlayer(){
         return this.player;
     }
-    /* 
-    @Override
-    public boolean getNull() {
-        return false;
-    }
-    */
 }
