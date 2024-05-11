@@ -1,9 +1,10 @@
+import Piece.BoardSquare;
 import Piece.Piece;
 import Piece.Position;
 
 public class NullSquare extends Piece{ //to represent a null square
     private Position position;
-    public boolean isValidMove(Position position, Piece[][] board) {
+    public boolean isValidMove(Position position, BoardSquare[][] board) {
         this.position = position;
         return false;
     }

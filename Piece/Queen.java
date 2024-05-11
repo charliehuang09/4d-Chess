@@ -35,7 +35,7 @@ public class Queen extends Piece{
     }
 
     @Override
-    public boolean isValidMove(Position position, Piece[][] board){
+    public boolean isValidMove(Position position, BoardSquare[][] board){
         ArrayList<Position> moves = getValidMoves(board);
         for (Position move : moves){
             if (move.getX() == position.getX() && move.getY() == position.getY()) return true;
@@ -48,7 +48,7 @@ public class Queen extends Piece{
         return this.player;
     }
 
-    public ArrayList<Position> getValidMoves(Piece[][] board){
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int x;
         int y;

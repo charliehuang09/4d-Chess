@@ -35,7 +35,7 @@ public class Rook extends Piece{
     }
 
     @Override
-    public boolean isValidMove(Position position, Piece[][] board){
+    public boolean isValidMove(Position position, BoardSquare[][] board){
         if (this.position.getX() == position.getX() && this.position.getY() == position.getY()) return false;
         if (this.position.getX() == position.getX()){
             for (int i = Math.min(this.position.getY(), position.getY()); i <= Math.max(this.position.getY(), position.getY()); i++){
@@ -58,7 +58,7 @@ public class Rook extends Piece{
     }
 
     
-    public ArrayList<Position> getValidMoves(Piece[][] board){
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int x;
         int y;

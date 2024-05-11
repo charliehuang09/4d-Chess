@@ -31,7 +31,7 @@ public class Pawn extends Piece{
         g.drawImage(this.image, x, y, null);
     }
     @Override
-    public boolean isValidMove(Position position, Piece[][] board){
+    public boolean isValidMove(Position position, BoardSquare[][] board){
         int[] dx = new int[]{0, 1, 0, -1};
         int[] dy = new int[]{1, 0, -1, 0};
         //pawn can move forward

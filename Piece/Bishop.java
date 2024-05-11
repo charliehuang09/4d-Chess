@@ -34,7 +34,7 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public boolean isValidMove(Position position, Piece[][] board){
+    public boolean isValidMove(Position position, BoardSquare[][] board){
         return false;
     }
     

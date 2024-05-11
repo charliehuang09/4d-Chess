@@ -49,6 +49,12 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public int getHeight() {
         return height;
     }
+    public int getPlayer(){
+        return piece.getPlayer();
+    }
+    public boolean isBlank(){
+        return piece.isBlank();
+    }
     
     
 }

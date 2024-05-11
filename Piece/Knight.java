@@ -34,7 +34,7 @@ public class Knight extends Piece{
     }
 
     @Override
-    public boolean isValidMove(Position position, Piece[][] board){
+    public boolean isValidMove(Position position, BoardSquare[][] board){
         int[] dx = new int[]{2, 2, -2, -2, -1, 1, -1, 1};
         int[] dy = new int[]{-1, 1, -1, 1, 2, 2, -2, -2};
         for (int i = 0; i < 8; i++){
