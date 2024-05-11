@@ -11,6 +11,8 @@ public class Screen extends JPanel implements MouseListener{
     private int y;
     private int tempX;
     private int tempY;
+    private boolean selecting;
+    private Position currentSelect;
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
@@ -18,6 +20,7 @@ public class Screen extends JPanel implements MouseListener{
         y = 10;
         tempX = x;
         tempY = y;
+        currentSelect = null;
         addMouseListener(this);
     }
     public Dimension getPreferredSize(){
@@ -69,7 +72,13 @@ public class Screen extends JPanel implements MouseListener{
         System.out.println("Clicked X: " + mX + ", Y: " + mY);
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
-            board[pos.getX()][pos.getY()].changeSelect();
+            if (currentSelect == null) {
+                board[pos.getX()][pos.getY()].changeSelect();
+                currentSelect = pos;
+            } else if (currentSelect != null){
+                board[currentSelect.getX()][currentSelect.getY()].changeSelect();
+                currentSelect = null;
+            }
         } else {
             System.out.println("Position is null");
         }
