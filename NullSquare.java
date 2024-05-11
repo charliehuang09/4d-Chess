@@ -18,7 +18,7 @@ public class NullSquare extends Piece{ //to represent a null square
     }
     @Override
     public Position getPosition(){
-        return this.getPosition();
+        return this.position;
     }
     @Override
     public boolean isBlank(){
