@@ -96,4 +96,8 @@ public class Rook extends Piece{
         }
         return output;
     }
+    @Override
+    public Position getPosition(){
+        return this.getPosition();
+    }
 }

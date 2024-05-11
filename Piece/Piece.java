@@ -4,6 +4,7 @@ import java.awt.*;
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, Piece[][] board);
     public abstract int getPlayer();
+    public abstract Position getPosition();
     public void drawMe(Graphics g, int x, int y, boolean black, boolean select, int width, int height) {
         if (black == true) {
             g.setColor( new Color(62,49,49));
@@ -20,7 +21,6 @@ public abstract class Piece {
         g.drawRect( x, y, width, height);
 
     }
-
     
     public static BufferedImage resize(BufferedImage image){
         Image temp = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);

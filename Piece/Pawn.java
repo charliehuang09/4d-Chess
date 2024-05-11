@@ -66,4 +66,8 @@ public class Pawn extends Piece{
     public int getPlayer(){
         return this.player;
     }
+    @Override
+    public Position getPosition(){
+        return this.getPosition();
+    }
 }

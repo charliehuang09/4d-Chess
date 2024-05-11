@@ -20,8 +20,6 @@ public class BoardSquare{ //make a class object for each square to make it easie
         nullSquare = nullS;
         width = 50;
         height = 50;
-
-
     }
     public void changeSelect() {
         select = !select;

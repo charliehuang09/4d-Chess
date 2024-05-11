@@ -42,9 +42,12 @@ public class Knight extends Piece{
         }
         return false;
     }
-    
     @Override
     public int getPlayer(){
         return this.player;
+    }
+    @Override
+    public Position getPosition(){
+        return this.getPosition();
     }
 }
