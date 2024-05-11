@@ -28,6 +28,21 @@ public class Queen extends Piece{
         }
         this.image = super.resize(image);
     }
+    public Queen(Position position, int player, int points){
+        this.value = points;
+        this.player = player;
+        this.position = position;
+        this.name = "Queen";
+
+        String[] teams = new String[] {"Blue", "Green", "Red", "Yellow"};
+        String path = "Assets" + "/" + teams[player] + "/" + this.name + ".png";
+        try {
+            this.image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+        this.image = super.resize(image);
+    }
     @Override
     public boolean isNull() {
         return false;

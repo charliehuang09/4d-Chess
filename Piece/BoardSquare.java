@@ -36,7 +36,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public void updatePosition(Position pos) {
         piece.updatePos(pos);
         if (doPawnPromotion()){
-            piece = new Queen(piece.getPosition(), piece.getPlayer());
+            piece = new Queen(piece.getPosition(), piece.getPlayer(), 1);
         }
     }
     public void changeSelect(String pass) {
