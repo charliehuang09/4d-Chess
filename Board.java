@@ -41,15 +41,15 @@ public class Board {
             for (int c = 0; c < board[0].length; c ++) {
                 if (alternate == false) {
                     if ((c+1) % 2 == 0) {
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, true);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, null, true);
                     } else if((c+1) % 2 == 1){
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, false);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, null, false);
                     }
                 } else {
                     if ((c+1) % 2 == 0) {
-                        board[r][c] = new BoardSquare(new BlankSquare(), false,false,  false);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, null,  false);
                     } else if ((c+1) % 2 == 1){
-                        board[r][c] = new BoardSquare(new BlankSquare(), false, false, true);
+                        board[r][c] = new BoardSquare(new BlankSquare(), false, null, true);
                     }
                 }
             }

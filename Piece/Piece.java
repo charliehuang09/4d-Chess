@@ -5,14 +5,16 @@ public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
     public abstract Position getPosition();
-    public void drawMe(Graphics g, int x, int y, boolean black, boolean select, int width, int height) {
+    public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height) {
         if (black == true) {
             g.setColor( new Color(62,49,49));
         } else {
             g.setColor (new Color(161, 102, 47));
         }
-        if (select == true) {
+        if (select == "current") {
             g.setColor (new Color(25, 128, 121));
+        } else if (select == "next") {
+            g.setColor (new Color(245, 239, 86));
         }
 
         

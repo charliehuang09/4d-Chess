@@ -26,7 +26,11 @@ public class Pawn extends Piece{
         this.image = super.resize(image);
     }
     @Override
-    public void drawMe(Graphics g, int x, int y, boolean black, boolean select, int width, int height) {
+    public boolean isBlank(){
+        return false;
+    }
+    @Override
+    public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height) {
         super.drawMe(g,x,y,black, select, width, height);
         g.drawImage(this.image, x, y, null);
     }
@@ -35,7 +39,7 @@ public class Pawn extends Piece{
         int[] dx = new int[]{0, 1, 0, -1};
         int[] dy = new int[]{1, 0, -1, 0};
         //pawn can move forward
-        if (this.position.getX() + dx[player] == this.position.getX() && this.position.getY() + dy[player] == position.getY() && board[position.getX()][position.getY()] == null){
+        if (this.position.getX() + dx[player] == this.position.getX() && this.position.getY() + dy[player] == position.getY() && board[position.getX()][position.getY()].getNull()){
             return true;
         }
         
