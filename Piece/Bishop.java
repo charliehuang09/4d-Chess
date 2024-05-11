@@ -82,6 +82,14 @@ public class Bishop extends Piece{
         return false;
     }
     @Override
+    public String getName(){
+        return "Bishop";
+    }
+    @Override
+    public void updatePos(Position pos) {
+        position = pos;
+    }
+    @Override
     public boolean isBlank(){
         return false;
     }

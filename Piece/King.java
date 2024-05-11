@@ -65,6 +65,14 @@ public class King extends Piece{
         return this.position;
     }
     @Override
+    public String getName(){
+        return "King";
+    }
+    @Override
+    public void updatePos(Position pos) {
+        position = pos;
+    }
+    @Override
     public int getValue(){
         return this.value;
     }

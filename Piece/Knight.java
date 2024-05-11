@@ -64,6 +64,14 @@ public class Knight extends Piece{
         return this.player;
     }
     @Override
+    public String getName(){
+        return "Knight";
+    }
+    @Override
+    public void updatePos(Position pos) {
+        position = pos;
+    }
+    @Override
     public Position getPosition(){
         return this.position;
     }

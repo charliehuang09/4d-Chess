@@ -30,6 +30,10 @@ public class Pawn extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public void updatePos(Position pos) {
+        position = pos;
+    }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int[] dx = new int[]{0, 1, 0, -1};
@@ -57,6 +61,10 @@ public class Pawn extends Piece{
     @Override
     public boolean isBlank(){
         return false;
+    }
+    @Override
+    public String getName(){
+        return "Pawn";
     }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {

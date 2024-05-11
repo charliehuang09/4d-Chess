@@ -33,6 +33,14 @@ public class Queen extends Piece{
         return false;
     }
     @Override
+    public String getName(){
+        return "Queen";
+    }
+    @Override
+    public void updatePos(Position pos) {
+        position = pos;
+    }
+    @Override
     public boolean isBlank(){
         return false;
     }

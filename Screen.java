@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 
 import Piece.Bishop;
@@ -10,6 +11,7 @@ import Piece.Position;
 import Piece.Queen;
 import Piece.Rook;
 import Piece.King;
+import Piece.Piece;
 public class Screen extends JPanel implements MouseListener{
     private Board boardClass;
     private BoardSquare[][] board;
@@ -17,7 +19,6 @@ public class Screen extends JPanel implements MouseListener{
     private int y;
     private int tempX;
     private int tempY;
-    private boolean selecting;
     private Position currentSelect;
     private Position nextSelect;
     public Screen() {
@@ -87,6 +88,26 @@ public class Screen extends JPanel implements MouseListener{
         x = tempX;
         return location;
     }
+    public void move() { //current only for moving to empty sqaures
+        
+        if (nextSelect != null) {
+            ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
+            for (Position move : moves){
+                if (move.equals(nextSelect)) {
+                    Piece temp = board[currentSelect.getX()][currentSelect.getY()].getPiece();
+                    board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
+                    board[nextSelect.getX()][nextSelect.getY()].setPiece(temp);
+                    System.out.println(board[currentSelect.getX()][currentSelect.getY()].getName() + " moved from: (" + currentSelect.getX() + "," + currentSelect.getY() + ") to (" + nextSelect.getX() + "," + nextSelect.getY() + ")");
+                    board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
+                    board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
+                    board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
+                    board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+                    currentSelect = null;
+                    nextSelect = null;
+                }
+            }
+        }
+    }
     public void mousePressed(MouseEvent e) {
 
         int mX = e.getX();
@@ -95,17 +116,17 @@ public class Screen extends JPanel implements MouseListener{
         System.out.println("Clicked X: " + mX + ", Y: " + mY);
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
-            if (currentSelect == null) {
+            if (currentSelect == null) { //selection of an empty square
                 if (board[pos.getX()][pos.getY()].isBlank() == false) {
                     System.out.println("set current");
                     board[pos.getX()][pos.getY()].changeSelect("current");
                     currentSelect = pos;
                 }
-            } else if (nextSelect == null) {
+            } else if (nextSelect == null) { //piece to an empty square
                 System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
                 nextSelect = pos;
-            } else if (currentSelect != null){
+            } else if (currentSelect != null){ //if the current selection is already made and want to be canceled
                 System.out.println("reset current and next");
                 board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
                 board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
@@ -116,6 +137,7 @@ public class Screen extends JPanel implements MouseListener{
         } else {
             System.out.println("Position is null");
         }
+        move();
         repaint();
     }
 

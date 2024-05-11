@@ -30,6 +30,14 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
         return null;
     }
     @Override
+    public String getName(){
+        return "BlankSquare";
+    }
+    @Override
+    public void updatePos(Position pos) {
+        //nothing
+    }
+    @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {}
 
     @Override

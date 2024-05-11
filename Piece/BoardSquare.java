@@ -1,6 +1,7 @@
 package Piece;
 import java.awt.Graphics;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class BoardSquare{ //make a class object for each square to make it easier to draw, can explain in person 
@@ -20,6 +21,15 @@ public class BoardSquare{ //make a class object for each square to make it easie
         width = 50;
         height = 50;
     }
+    public boolean returnValidMoves(Position position, BoardSquare[][] board) {
+        return piece.isValidMove(position,board);
+    }
+    public ArrayList<Position> returnValidMoveSet(Position position, BoardSquare[][] board) {
+        return piece.getValidMoves(board);
+    }
+    public void updatePosition(Position pos) {
+        piece.updatePos(pos);
+    }
     public void changeSelect(String pass) {
         select = pass;
     }
@@ -36,6 +46,9 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
     public Piece getPiece() {
         return piece;
+    }
+    public String getName() {
+        return piece.getName();
     }
 
     public void drawBoard(Graphics g, int y, int x){
@@ -77,6 +90,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public boolean isNull(){
         return piece.isNull();
     }
+    
     public void drawMoves(Graphics g, BoardSquare[][] board){
         piece.drawMoves(g, select, board);
     }

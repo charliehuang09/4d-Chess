@@ -2,6 +2,8 @@ package Piece;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
+import Piece.Piece;
+import Piece.Position;
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
@@ -10,6 +12,8 @@ public abstract class Piece {
     public abstract int getValue();
     public abstract boolean isNull();
     public abstract ArrayList<Position> getValidMoves(BoardSquare[][] board);
+    public abstract String getName();
+    public abstract void updatePos(Position pos);
 
     public void drawMoves(Graphics g, String select, BoardSquare[][] board){
         if (select == "current"){
@@ -21,6 +25,7 @@ public abstract class Piece {
             }
         }
     }
+    
     
     public static BufferedImage resize(BufferedImage image){
         Image temp = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
@@ -41,6 +46,6 @@ public abstract class Piece {
         if (x >= board.length) return false;
         if (y >= board[0].length) return false;
         return true;
-     }
-    //public boolean getNull(); //im changing the null system //nevermind, im changning it again
+    }
+    
 }
