@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 
+import Piece.Bishop;
 import Piece.BoardSquare;
 import Piece.Position;
 import Piece.Rook;
@@ -21,6 +22,7 @@ public class Screen extends JPanel implements MouseListener{
         boardClass = new Board();
         board = boardClass.getBoard();
         board[8][8].setPiece(new Rook(new Position(8, 8), 0));
+        board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
         tempX = x;

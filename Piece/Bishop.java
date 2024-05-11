@@ -30,6 +30,52 @@ public class Bishop extends Piece{
     }
     @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
+
+        int x;
+        int y;
+
+        //down right
+        x = this.position.getX() + 1;
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
+            output.add(new Position(x, y));
+            x++;
+            y++;
+        }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
+
+        //up right
+        x = this.position.getX() - 1;
+        y = this.position.getY() + 1;
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
+            output.add(new Position(x, y));
+            x--;
+            y++;
+        }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
+
+        //down left
+        x = this.position.getX() + 1;
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
+            output.add(new Position(x, y));
+            x++;
+            y--;
+        }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
+
+        //up left
+        x = this.position.getX() - 1;
+        y = this.position.getY() - 1;
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
+            output.add(new Position(x, y));
+            x--;
+            y--;
+        }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
+        
+         
+
         return output;
     }
     @Override
