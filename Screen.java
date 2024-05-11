@@ -20,7 +20,7 @@ public class Screen extends JPanel implements MouseListener{
     public Screen() {
         boardClass = new Board();
         board = boardClass.getBoard();
-        board[11][8].setPiece(new Rook(new Position(11, 8), 0));
+        board[8][8].setPiece(new Rook(new Position(8, 8), 0));
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
         tempX = x;
@@ -54,8 +54,13 @@ public class Screen extends JPanel implements MouseListener{
         }
         x = tempX;
         y = tempY;
-        
 
+
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                board[i][j].drawMoves(g, board);
+            }
+        }
     }
 
     public Position returnLocation(int mX, int mY) { //goes through every single index and if the mouse coordinates are within the rnages, it returns the position

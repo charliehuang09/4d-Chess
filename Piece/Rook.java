@@ -44,45 +44,43 @@ public class Rook extends Piece{
         //up
         x = this.position.getX() - 1;
         y = this.position.getY();
-        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //down
         x = this.position.getX() + 1;
         y = this.position.getY();
-        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             x++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //right
         x = this.position.getX();
         y = this.position.getY() + 1;
-        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             y++;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
 
         //left
         x = this.position.getX();
         y = this.position.getY() - 1;
-        while(super.inBound(x, y, board) && board[x][y].isBlank() && !board[x][y].isNull()){
+        while(super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].isBlank()){
             output.add(new Position(x, y));
             y--;
         }
+        if (super.inBound(x, y, board) && !board[x][y].isNull() && board[x][y].getPlayer() != player) output.add(new Position(x, y));
+
         return output;
     }
     @Override
     public void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board) {
-        if (select == "current"){
-            ArrayList<Position> moves = getValidMoves(board);
-
-            for (Position move : moves){
-                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
-            }
-        }
         g.drawImage(this.image, x, y, null);
     }
     @Override

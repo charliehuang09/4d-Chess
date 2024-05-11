@@ -77,6 +77,9 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public boolean isNull(){
         return piece.isNull();
     }
+    public void drawMoves(Graphics g, BoardSquare[][] board){
+        piece.drawMoves(g, select, board);
+    }
     
     
 }

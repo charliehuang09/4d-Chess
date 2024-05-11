@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -26,6 +27,10 @@ public class Bishop extends Piece{
             System.out.println("Failed");
         }
         this.image = super.resize(image);
+    }
+    @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+        ArrayList<Position> output = new ArrayList<Position>();
+        return output;
     }
     @Override
     public boolean isNull() {

@@ -1,6 +1,7 @@
 package Piece;
 import java.awt.image.BufferedImage;
 import java.awt.*;
+import java.util.ArrayList;
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
@@ -8,6 +9,17 @@ public abstract class Piece {
     public abstract void drawMe(Graphics g, int x, int y, boolean black, String select, int width, int height, BoardSquare[][] board);
     public abstract int getValue();
     public abstract boolean isNull();
+    public abstract ArrayList<Position> getValidMoves(BoardSquare[][] board);
+
+    public void drawMoves(Graphics g, String select, BoardSquare[][] board){
+        if (select == "current"){
+            ArrayList<Position> moves = getValidMoves(board);
+
+            for (Position move : moves){
+                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+            }
+        }
+    }
     
     public static BufferedImage resize(BufferedImage image){
         Image temp = image.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
