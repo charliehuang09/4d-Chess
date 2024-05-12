@@ -25,7 +25,7 @@ public class Screen extends JPanel implements MouseListener{
     private Position currentSelect;
     private Position nextSelect;
     private int[] points;
-    private JLabel player2Score;
+    private JLabel player0Score;
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
@@ -45,33 +45,33 @@ public class Screen extends JPanel implements MouseListener{
         nextSelect = null;
         addMouseListener(this);
         
+        player0Score = new JLabel();
+        player0Score.setFont(new Font("Arial", Font.BOLD, 35));
+        player0Score.setHorizontalAlignment(SwingConstants.CENTER);
+        player0Score.setBounds(221, 488, 200, 30);
+        player0Score.setText("Blue: " + points[0]);
+        this.add(player0Score);
+
+        player1Score = new JLabel();
+        player1Score.setFont(new Font("Arial", Font.BOLD, 35));
+        player1Score.setHorizontalAlignment(SwingConstants.CENTER);
+        player1Score.setBounds(572, 80, 200, 30);
+        player1Score.setText("Green: " + points[1]);
+        this.add(player1Score);
+
         player2Score = new JLabel();
-player2Score.setFont(new Font("Arial", Font.BOLD, 20));
-player2Score.setHorizontalAlignment(SwingConstants.CENTER);
-player2Score.setBounds(296, 258, 200, 30);
-player2Score.setText("label");
-this.add(player2Score);
+        player2Score.setFont(new Font("Arial", Font.BOLD, 35));
+        player2Score.setHorizontalAlignment(SwingConstants.CENTER);
+        player2Score.setBounds(1219, 267, 200, 30);
+        player2Score.setText("Red: " + points[2]);
+        this.add(player2Score);
 
-player3Score = new JLabel();
-player3Score.setFont(new Font("Arial", Font.BOLD, 20));
-player3Score.setHorizontalAlignment(SwingConstants.CENTER);
-player3Score.setBounds(614, 656, 200, 30);
-player3Score.setText("label");
-this.add(player3Score);
-
-player2Score = new JLabel();
-player2Score.setFont(new Font("Arial", Font.BOLD, 20));
-player2Score.setHorizontalAlignment(SwingConstants.CENTER);
-player2Score.setBounds(1265, 515, 200, 30);
-player2Score.setText("label");
-this.add(player2Score);
-
-player1Score = new JLabel();
-player1Score.setFont(new Font("Arial", Font.BOLD, 20));
-player1Score.setHorizontalAlignment(SwingConstants.CENTER);
-player1Score.setBounds(945, 60, 200, 30);
-player1Score.setText("label");
-this.add(player1Score);
+        player3Score = new JLabel();
+        player3Score.setFont(new Font("Arial", Font.BOLD, 35));
+        player3Score.setHorizontalAlignment(SwingConstants.CENTER);
+        player3Score.setBounds(787, 927, 200, 30);
+        player3Score.setText("Yellow: " + points[3]);
+        this.add(player3Score);
     
     }
     public Dimension getPreferredSize(){
@@ -126,7 +126,7 @@ this.add(player1Score);
         x = tempX;
         return location;
     }
-    public void move() { //current only for moving to empty sqaures
+    public void move() { //successful moving
         if (nextSelect != null) {
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
@@ -144,6 +144,12 @@ this.add(player1Score);
                     for (int i = 0; i < points.length; i++) {
                         System.out.println(i + "has:" + points[i]);
                     }
+                    player0Score.setText("Blue: " + points[0]);
+                    player1Score.setText("Green: " + points[1]);
+                    player2Score.setText("Red: " + points[2]);
+                    player3Score.setText("Yellow: " + points[3]);
+
+
                     board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
