@@ -109,4 +109,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public int getValue(){
         return this.piece.getValue();
     }
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+        return piece.getValidMoves(board);
+    }
 }
