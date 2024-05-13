@@ -1,9 +1,6 @@
+package Piece;
 import java.awt.Graphics;
 import java.util.ArrayList;
-
-import Piece.BoardSquare;
-import Piece.Piece;
-import Piece.Position;
 
 public class BlankSquare extends Piece{ //a class to represent a square that is empty
     public boolean isValidMove(Position position, BoardSquare[][] board) {

@@ -104,8 +104,8 @@ public class BoardSquare{ //make a class object for each square to make it easie
         return piece.isNull();
     }
     
-    public void drawMoves(Graphics g, BoardSquare[][] board){
-        this.piece.drawMoves(g, select, board);
+    public void drawMoves(Graphics g, BoardSquare[][] board, King[] kings){
+        this.piece.drawMoves(g, select, board, kings);
     }
     public void move(){
         this.piece.move();

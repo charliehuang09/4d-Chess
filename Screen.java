@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 import Piece.Bishop;
+import Piece.BlankSquare;
 import Piece.BoardSquare;
 import Piece.Position;
 import Piece.Queen;
@@ -109,7 +110,7 @@ public class Screen extends JPanel implements MouseListener{
 
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
-                board[i][j].drawMoves(g, board);
+                board[i][j].drawMoves(g, board, kings);
             }
         }
     }
