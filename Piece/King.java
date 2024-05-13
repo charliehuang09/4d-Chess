@@ -31,7 +31,8 @@ public class King extends Piece{
     public boolean inCheck(BoardSquare[][] board, Position position){
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
-                if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player){
+                System.out.println(this.player);
+                if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player && board[i][j].getName() != "King"){
                     ArrayList<Position> moves = board[i][j].getValidMoves(board);
                     for (Position move : moves){
                         if (move.equals(position)) return true;
@@ -55,7 +56,7 @@ public class King extends Piece{
         int[] dx = new int[]{1, -1, 0, 0, 1, 1, -1, -1};
         int[] dy = new int[]{0, 0, 1, -1, -1, 1, 1, -1};
         for (int i = 0; i < 8; i++){
-            if (super.inBound(position.getX() + dx[i], position.getY() + dy[i], board) && !board[position.getX() + dx[i]][position.getY() + dy[i]].isNull() && board[position.getX() + dx[i]][position.getY() + dy[i]].getPlayer() != player) output.add(new Position(position.getX() + dx[i], position.getY() + dy[i]));
+            if (super.inBound(position.getX() + dx[i], position.getY() + dy[i], board) && !board[position.getX() + dx[i]][position.getY() + dy[i]].isNull() && board[position.getX() + dx[i]][position.getY() + dy[i]].getPlayer() != player && !inCheck(board, new Position(position.getX() + dx[i], position.getY() + dy[i]))) output.add(new Position(position.getX() + dx[i], position.getY() + dy[i]));
         }
         return output;
     }

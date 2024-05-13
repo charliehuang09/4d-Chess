@@ -152,9 +152,6 @@ public class Screen extends JPanel implements MouseListener{
         board[currentSelect.getX()][currentSelect.getY()].move();
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
-        King king = this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()];
-        System.out.println(king);
-        System.out.println(this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board));
         return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
     }
     public void move() { //successful moving
