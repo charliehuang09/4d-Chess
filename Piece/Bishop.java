@@ -27,6 +27,9 @@ public class Bishop extends Piece{
         }
         this.image = super.resize(image);
     }
+    @Override public Piece clone(){
+        return new Bishop(this.position.clone(), this.player);
+    }
     @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
 

@@ -30,6 +30,10 @@ public class Pawn extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public Piece clone(){
+        return new Pawn(this.position.clone(), this.player);
+    }
+    @Override
     public void updatePos(Position pos) {
         position = pos;
     }

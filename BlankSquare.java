@@ -9,6 +9,10 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
     public boolean isValidMove(Position position, BoardSquare[][] board) {
         return false;
     }
+    @Override
+    public Piece clone(){
+        return new BlankSquare();
+    }
     @Override public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         return output;

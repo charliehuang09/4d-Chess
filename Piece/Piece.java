@@ -14,6 +14,7 @@ public abstract class Piece {
     public abstract ArrayList<Position> getValidMoves(BoardSquare[][] board);
     public abstract String getName();
     public abstract void updatePos(Position pos);
+    public abstract Piece clone();
 
     public void drawMoves(Graphics g, String select, BoardSquare[][] board){
         if (select == "current"){

@@ -29,7 +29,7 @@ public class Screen extends JPanel implements MouseListener{
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
-    private Piece[] kings;
+    private King[] kings;
     public Screen() {
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
@@ -132,16 +132,28 @@ public class Screen extends JPanel implements MouseListener{
         x = tempX;
         return location;
     }
+    public boolean isValidMove(Position currentSelect, Position nextSelect){
+        BoardSquare[][] board = new BoardSquare[this.board.length][this.board[0].length];
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                board[i][j] = this.board[i][j].clone();
+            }
+        }
+        board[currentSelect.getX()][currentSelect.getY()].move();
+        board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
+        board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
+        King king = this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()];
+        System.out.println(king);
+        System.out.println(this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board));
+        return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
+    }
     public void move() { //successful moving
         if (nextSelect != null) {
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
-                if (move.equals(nextSelect)) {
+                if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
-                    // Piece currPiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
-                    // board[currentSelect.getX()][currentSelect.getY()].setPiece(board[nextSelect.getX()][nextSelect.getY()].getPiece());
-                    // board[nextSelect.getX()][nextSelect.getY()].setPiece(currPiece);
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
 

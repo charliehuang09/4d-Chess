@@ -29,6 +29,10 @@ public class Knight extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public Piece clone(){
+        return new Knight(this.position.clone(), this.player);
+    }
+    @Override
     public boolean isNull() {
         return false;
     }
