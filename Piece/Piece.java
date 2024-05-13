@@ -21,7 +21,8 @@ public abstract class Piece {
             ArrayList<Position> moves = getValidMoves(board);
 
             for (Position move : moves){
-                if (isValidMove(this.getPosition(), move, board, kings)) g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10); //remove for efficiancy
+                //if (isValidMove(this.getPosition(), move, board, kings));
+                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10); //remove for efficiancy
             }
         }
     }
