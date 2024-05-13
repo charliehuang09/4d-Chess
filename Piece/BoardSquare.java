@@ -20,6 +20,10 @@ public class BoardSquare{ //make a class object for each square to make it easie
         width = 50;
         height = 50;
     }
+    public BoardSquare clone(){ 
+        BoardSquare copy = new BoardSquare(this.piece.clone(), this.nullSquare, this.select, this.black);
+        return copy;
+    } 
     private boolean doPawnPromotion(){
         if (piece.getName() != "Pawn") return false;
         int[] dx = new int[] {-1, 7, -1, 6};
@@ -28,7 +32,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
         return false;
     }
     public boolean returnValidMoves(Position position, BoardSquare[][] board) {
-        return piece.isValidMove(position,board);
+        return piece.isValidMove(position, board);
     }
     public ArrayList<Position> returnValidMoveSet(Position position, BoardSquare[][] board) {
         return piece.getValidMoves(board);
@@ -100,13 +104,16 @@ public class BoardSquare{ //make a class object for each square to make it easie
         return piece.isNull();
     }
     
-    public void drawMoves(Graphics g, BoardSquare[][] board){
-        this.piece.drawMoves(g, select, board);
+    public void drawMoves(Graphics g, BoardSquare[][] board, King[] kings){
+        this.piece.drawMoves(g, select, board, kings);
     }
     public void move(){
         this.piece.move();
     }
     public int getValue(){
         return this.piece.getValue();
+    }
+    public ArrayList<Position> getValidMoves(BoardSquare[][] board){
+        return piece.getValidMoves(board);
     }
 }

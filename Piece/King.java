@@ -28,6 +28,27 @@ public class King extends Piece{
         }
         this.image = super.resize(image);
     }
+    public boolean inCheck(BoardSquare[][] board, Position position){
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player){
+                    ArrayList<Position> moves = board[i][j].getValidMoves(board);
+                    for (Position move : moves){
+                        if (move.equals(position)) return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public boolean inCheck(BoardSquare[][] board){
+        System.out.println("name");
+        return this.inCheck(board, this.position.clone());
+    }
+    @Override
+    public Piece clone(){
+        return new King(this.position, this.player);
+    }
     @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();

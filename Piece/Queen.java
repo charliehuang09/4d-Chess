@@ -44,6 +44,10 @@ public class Queen extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public Piece clone(){
+        return new Queen(this.position.clone(), this.player);
+    }
+    @Override
     public boolean isNull() {
         return false;
     }

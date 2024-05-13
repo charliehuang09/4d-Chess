@@ -15,6 +15,10 @@ public class NullSquare extends Piece{ //to represent a null square
         return -1;
     }
     @Override
+    public Piece clone(){
+        return new NullSquare();
+    }
+    @Override
     public String getName(){
         return "NullSquare";
     }
