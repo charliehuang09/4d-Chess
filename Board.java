@@ -129,39 +129,20 @@ public class Board {
     public void king() { //adds the kings
         
         
-        //makes the pawns on teh team 1 and team 3 (blue and green)
-        for (int c = 0; c < board[0].length; c++) {
-            if (c == 6) {
-                board[0][c].startUpdate(new King(new Position(0,c), 1),false);
-                board[13][c].startUpdate(new King(new Position(13,c), 3),false);
-            }
-        }
-        //team 0, team 2
-        for (int r = 0; r < board.length; r++) {
-            if (r == 6) {
-                board[r][0].startUpdate(new King(new Position(r,0), 0),false);
-                board[r][13].startUpdate(new King(new Position(r,13), 2),false);
-            }
-        }
+        board[6][0].startUpdate(new King(new Position(6,0), 0),false); 
+        board[0][6].startUpdate(new King(new Position(0,6), 1),false); 
+        board[7][13].startUpdate(new King(new Position(7,13), 2),false);
+        board[13][7].startUpdate(new King(new Position(13,7), 3),false);
     }
     
-    public void queen() { //adds the kings
+    public void queen() { //adds the queens
         
+        board[7][0].startUpdate(new Queen(new Position(7,0), 0),false); //fine
+        board[0][7].startUpdate(new Queen(new Position(0,7), 1),false); //fine
+        board[6][13].startUpdate(new Queen(new Position(6,13), 2),false);
+        board[13][6].startUpdate(new Queen(new Position(13,6), 3),false);
+
         
-        //makes the pawns on teh team 1 and team 3 (blue and green)
-        for (int c = 0; c < board[0].length; c++) {
-            if (c == 7) {
-                board[0][c].startUpdate(new Queen(new Position(0,c), 1),false);
-                board[13][c].startUpdate(new Queen(new Position(13,c), 3),false);
-            }
-        }
-        //team 0, team 2
-        for (int r = 0; r < board.length; r++) {
-            if (r == 7) {
-                board[r][0].startUpdate(new Queen(new Position(r,0), 0),false);
-                board[r][13].startUpdate(new Queen(new Position(r,13), 2),false);
-            }
-        }
     }
 
     //ROOK CLASS

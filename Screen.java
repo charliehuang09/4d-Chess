@@ -44,10 +44,12 @@ public class Screen extends JPanel implements MouseListener{
         board[6][7].setPiece(new Queen(new Position(6, 7), 0));
         board[8][8].setPiece(new Rook(new Position(8, 8), 0));
         board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
-        kings = new King[] {(King) board[6][0].getPiece(), (King) board[0][6].getPiece(), (King) board[6][13].getPiece(), (King) board[13][6].getPiece()};
+        
+        kings = new King[] {(King) board[6][0].getPiece(), (King) board[0][6].getPiece(), (King) board[7][13].getPiece(), (King) board[13][7].getPiece()};
         for (Piece element : kings){
             System.out.println(element);
         }
+        
 
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
