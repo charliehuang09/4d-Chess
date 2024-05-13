@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import javax.swing.JFrame;
 
 import Piece.Bishop;
 import Piece.BoardSquare;
@@ -30,6 +31,10 @@ public class Screen extends JPanel implements MouseListener{
     private JLabel player2Score;
     private JLabel player1Score;
     public Screen() {
+        setLayout(null);
+
+
+
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
         board = boardClass.getBoard();
@@ -48,28 +53,28 @@ public class Screen extends JPanel implements MouseListener{
         player0Score = new JLabel();
         player0Score.setFont(new Font("Arial", Font.BOLD, 35));
         player0Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player0Score.setBounds(221, 488, 200, 30);
+        player0Score.setBounds(tempX+-20, tempY+650, 200, 30);
         player0Score.setText("Blue: " + points[0]);
         this.add(player0Score);
 
         player1Score = new JLabel();
         player1Score.setFont(new Font("Arial", Font.BOLD, 35));
         player1Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player1Score.setBounds(572, 80, 200, 30);
+        player1Score.setBounds(tempX-20, tempY+40, 200, 30);
         player1Score.setText("Green: " + points[1]);
         this.add(player1Score);
 
         player2Score = new JLabel();
         player2Score.setFont(new Font("Arial", Font.BOLD, 35));
         player2Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player2Score.setBounds(1219, 267, 200, 30);
+        player2Score.setBounds(tempX + 575, tempY + 70, 200, 30);
         player2Score.setText("Red: " + points[2]);
         this.add(player2Score);
 
         player3Score = new JLabel();
         player3Score.setFont(new Font("Arial", Font.BOLD, 35));
         player3Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player3Score.setBounds(787, 927, 200, 30);
+        player3Score.setBounds(tempX + 575, tempY + 575, 200, 30);
         player3Score.setText("Yellow: " + points[3]);
         this.add(player3Score);
     
