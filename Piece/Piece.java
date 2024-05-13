@@ -47,6 +47,9 @@ public abstract class Piece {
         if (y >= board[0].length) return false;
         return true;
     }
+    public String toString(){
+        return this.getPlayer() + ": " + this.getName();
+    }
     public void move() { }
     
 }

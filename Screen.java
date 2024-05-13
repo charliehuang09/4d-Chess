@@ -29,6 +29,7 @@ public class Screen extends JPanel implements MouseListener{
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
+    private Piece[] kings;
     public Screen() {
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
@@ -37,6 +38,11 @@ public class Screen extends JPanel implements MouseListener{
         board[6][7].setPiece(new Queen(new Position(6, 7), 0));
         board[8][8].setPiece(new Rook(new Position(8, 8), 0));
         board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
+        kings = new Piece[] {board[6][0].getPiece(), board[0][6].getPiece(), board[6][13].getPiece(), board[13][6].getPiece()};
+        for (Piece element : kings){
+            System.out.println(element);
+        }
+
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
         y = 10;
         tempX = x;
