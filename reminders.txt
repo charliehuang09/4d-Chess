@@ -1,0 +1,1 @@
+remember to turn on turns after testing checkmate detection, it should be commented out on line 211 Screenclass - ryan

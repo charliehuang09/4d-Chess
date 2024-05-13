@@ -32,10 +32,12 @@ public class Screen extends JPanel implements MouseListener{
     private JLabel player2Score;
     private JLabel player1Score;
     private King[] kings;
+
+    private int turn; 
     public Screen() {
         setLayout(null);
 
-
+        turn = 3; //RED ALWAYS GOES FIRST
 
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
@@ -182,8 +184,19 @@ public class Screen extends JPanel implements MouseListener{
                     board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
                     currentSelect = null;
                     nextSelect = null;
+
+                    changeTurn();
+
                 }
             }
+        }
+    }
+
+    public void changeTurn() {
+        if (turn < 3) {
+            turn ++;
+        } else {
+            turn = 0;
         }
     }
     public void mousePressed(MouseEvent e) {
@@ -194,12 +207,14 @@ public class Screen extends JPanel implements MouseListener{
         System.out.println("Clicked X: " + mX + ", Y: " + mY);
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
-            if (currentSelect == null) { //selection of an empty square
-                if (board[pos.getX()][pos.getY()].isBlank() == false) {
-                    System.out.println("set current");
-                    board[pos.getX()][pos.getY()].changeSelect("current");
-                    currentSelect = pos;
-                }
+            if (currentSelect == null) { 
+                //if (board[pos.getX()][pos.getY()].getPlayer() == turn) { 
+                    if (board[pos.getX()][pos.getY()].isBlank() == false) {
+                        System.out.println("set current");
+                        board[pos.getX()][pos.getY()].changeSelect("current");
+                        currentSelect = pos;
+                    }
+                //}
             } else if (nextSelect == null) { //piece to an empty square
                 System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
