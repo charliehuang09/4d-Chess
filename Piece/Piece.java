@@ -48,7 +48,7 @@ public abstract class Piece {
         return true;
     }
     public String toString(){
-        return this.getPlayer() + ": " + this.getName();
+        return this.getPlayer() + ": " + this.getName() + this.getPosition().toString();
     }
     public void move() { }
     
