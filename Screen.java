@@ -2,6 +2,7 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
+import java.lang.Character.Subset;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
@@ -143,7 +144,9 @@ public class Screen extends JPanel implements MouseListener{
         return location;
     }
     public void checkMateDetection(){
+        System.out.println("Start");
         King king = this.kings[turn];
+        System.out.println(king.getPlayer());
         if (king.inCheck(board)){
             System.out.println("In Check");
             for (int i = 0; i < this.board.length; i++){
@@ -152,6 +155,8 @@ public class Screen extends JPanel implements MouseListener{
                         ArrayList<Position> moves = board[i][j].getValidMoves(board);
                         for (Position move : moves){
                             if (isValidMove(board[i][j].getPosition(), move)){
+                                System.out.println(this.board[i][j].getName());
+                                System.out.println(move);
                                 System.out.println("No Checkmate");
                                 return;
                             }
@@ -160,13 +165,12 @@ public class Screen extends JPanel implements MouseListener{
                 }
             }
             System.out.println("Checkmate Detected");
+            return;
         }
         System.out.println("No Checkmate");
         return;
     }
     public boolean isValidMove(Position currentSelect, Position nextSelect){
-        System.out.println(currentSelect);
-        System.out.println(nextSelect);
         BoardSquare[][] board = new BoardSquare[this.board.length][this.board[0].length];
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
@@ -182,6 +186,7 @@ public class Screen extends JPanel implements MouseListener{
         board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
         board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
         
+        if (board[nextSelect.getX()][nextSelect.getY()].getName().equals("King")) return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board, nextSelect);
         return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
     }
     public void move() { //successful moving
@@ -213,6 +218,7 @@ public class Screen extends JPanel implements MouseListener{
                     nextSelect = null;
 
                     changeTurn();
+                    checkMateDetection();
 
                 }
             }
@@ -256,7 +262,6 @@ public class Screen extends JPanel implements MouseListener{
             System.out.println("Position is null");
         }
         move(); //checks if a move has been made and calculates the resulting change
-        // checkMateDetection();
         repaint();
     }
 

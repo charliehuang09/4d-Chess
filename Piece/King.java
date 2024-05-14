@@ -35,9 +35,6 @@ public class King extends Piece{
                     ArrayList<Position> moves = board[i][j].getAttackingMoves(board);
                     for (Position move : moves){
                         if (move.equals(position)) {
-                            System.out.println(player);
-                            System.out.println(board[i][j].getPlayer());
-                            System.out.println(board[i][j].getName());
                             return true;
                         }
                     }
