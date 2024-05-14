@@ -48,24 +48,21 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         setLayout(null);
         setFocusable(true);
 
-        inMenu = true;
         startGameButton = new JButton();
         startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
         startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
-        startGameButton.setBounds(790, 644, 350, 70);
+        startGameButton.setBounds(539, 469, 350, 70);
         startGameButton.setText("Start");
         this.add(startGameButton);
         startGameButton.addActionListener(this);
-        startGameButton.setVisible(true);
-        
 
         ChessLabel = new JLabel();
         ChessLabel.setFont(new Font("Arial", Font.BOLD, 250));
         ChessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        ChessLabel.setBounds(590, 172, 750, 300);
+        ChessLabel.setBounds(192, 39, 1000, 300);
         ChessLabel.setText("Chess");
         this.add(ChessLabel);
-        ChessLabel.setVisible(false);
+        
         
         startGame();
         alive = 4;
