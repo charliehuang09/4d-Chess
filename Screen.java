@@ -81,12 +81,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         
         
         startGame();
-        alive = 4;
+        
+        addMouseListener(this);
     
     }
     public void startGame() {
+        alive = 4;
         turn = 3; //RED ALWAYS GOES FIRST
 
+        
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
         board = boardClass.getBoard();
@@ -104,7 +107,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         tempY = y;
         currentSelect = null;
         nextSelect = null;
-        addMouseListener(this);
+        
         
         player0Score = new JLabel();
         player0Score.setFont(new Font("Arial", Font.BOLD, 35));
@@ -347,6 +350,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         if (e.getSource() == startGameButton) {
             startGameButton.setVisible(false);
             ChessLabel.setVisible(false);
+            backToMenu.setVisible(true);
             inMenu = false;
             repaint();
         }
@@ -354,6 +358,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             backToMenu.setVisible(false);
             startGameButton.setVisible(true);
             ChessLabel.setVisible(true);
+            player0Score.setVisible(false);
+            player1Score.setVisible(false);
+            player2Score.setVisible(false);
+            player3Score.setVisible(false);
+            
+            startGame();
+            
+
+            
             inMenu = true;
             repaint();
         }
