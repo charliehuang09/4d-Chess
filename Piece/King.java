@@ -33,12 +33,13 @@ public class King extends Piece{
             for (int j = 0; j < board[i].length; j++){
                 if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player && !board[i][j].getName().equals("King")){
                     ArrayList<Position> moves = board[i][j].getAttackingMoves(board);
-                    if (board[i][j].getName().equals("Pawn")){
-                        System.out.println(moves);
-                        System.out.println(position);
-                    }
                     for (Position move : moves){
-                        if (move.equals(position)) return true;
+                        if (move.equals(position)) {
+                            System.out.println(player);
+                            System.out.println(board[i][j].getPlayer());
+                            System.out.println(board[i][j].getName());
+                            return true;
+                        }
                     }
                 }
             }

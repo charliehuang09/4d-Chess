@@ -119,4 +119,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
         return piece.getAttackingMoves(board);
     }
+    public Position getPosition(){
+        return piece.getPosition();
+    }
 }

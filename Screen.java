@@ -32,8 +32,8 @@ public class Screen extends JPanel implements MouseListener{
     private JLabel player2Score;
     private JLabel player1Score;
     private King[] kings;
-
     private int turn; 
+
     public Screen() {
         setLayout(null);
 
@@ -142,7 +142,31 @@ public class Screen extends JPanel implements MouseListener{
         x = tempX;
         return location;
     }
+    public void checkMateDetection(){
+        King king = this.kings[turn];
+        if (king.inCheck(board)){
+            System.out.println("In Check");
+            for (int i = 0; i < this.board.length; i++){
+                for (int j = 0; j < this.board[i].length; j++){
+                    if (this.board[i][j].getPlayer() == turn){
+                        ArrayList<Position> moves = board[i][j].getValidMoves(board);
+                        for (Position move : moves){
+                            if (isValidMove(board[i][j].getPosition(), move)){
+                                System.out.println("No Checkmate");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println("Checkmate Detected");
+        }
+        System.out.println("No Checkmate");
+        return;
+    }
     public boolean isValidMove(Position currentSelect, Position nextSelect){
+        System.out.println(currentSelect);
+        System.out.println(nextSelect);
         BoardSquare[][] board = new BoardSquare[this.board.length][this.board[0].length];
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
@@ -152,7 +176,13 @@ public class Screen extends JPanel implements MouseListener{
         board[currentSelect.getX()][currentSelect.getY()].move();
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
-        return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board, new Position(nextSelect.getX(), nextSelect.getY()));
+        
+        board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
+        board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
+        board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
+        board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+        
+        return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
     }
     public void move() { //successful moving
         if (nextSelect != null) {
@@ -190,11 +220,9 @@ public class Screen extends JPanel implements MouseListener{
     }
 
     public void changeTurn() {
-        if (turn < 3) {
-            turn ++;
-        } else {
-            turn = 0;
-        }
+        turn++;
+        turn %= 4;
+        System.out.println(turn);
     }
     public void mousePressed(MouseEvent e) {
 
@@ -205,19 +233,19 @@ public class Screen extends JPanel implements MouseListener{
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
             if (currentSelect == null) { 
-                //if (board[pos.getX()][pos.getY()].getPlayer() == turn) { 
+                if (board[pos.getX()][pos.getY()].getPlayer() == turn) { 
                     if (board[pos.getX()][pos.getY()].isBlank() == false) {
-                        System.out.println("set current");
+                        // System.out.println("set current");
                         board[pos.getX()][pos.getY()].changeSelect("current");
                         currentSelect = pos;
                     }
-                //}
+                }
             } else if (nextSelect == null) { //piece to an empty square
                 System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
                 nextSelect = pos;
             } else if (currentSelect != null){ //if the current selection is already made and want to be canceled
-                System.out.println("reset current and next");
+                // System.out.println("reset current and next");
                 board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
                 board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
                 
@@ -228,6 +256,7 @@ public class Screen extends JPanel implements MouseListener{
             System.out.println("Position is null");
         }
         move(); //checks if a move has been made and calculates the resulting change
+        // checkMateDetection();
         repaint();
     }
 
