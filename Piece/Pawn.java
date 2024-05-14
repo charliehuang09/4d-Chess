@@ -38,6 +38,23 @@ public class Pawn extends Piece{
         position = pos;
     }
     @Override
+    public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
+        ArrayList<Position> output = new ArrayList<Position>();
+        int[] dx = new int[]{0, 1, 0, -1};
+        int[] dy = new int[]{1, 0, -1, 0};
+        
+        //diagonal capture
+        dx = new int[]{-1, 1,  1, -1};
+        dy = new int[]{ 1, 1, -1, -1};
+        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player && !board[position.getX() + dx[player]][position.getY() + dy[player]].isNull())output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
+
+        dx = new int[]{1, 1,  -1, -1};
+        dy = new int[]{1, -1, -1,  1};
+        if (!board[position.getX() + dx[player]][position.getY() + dy[player]].isBlank() && board[position.getX() + dx[player]][position.getY() + dy[player]].getPlayer() != player && !board[position.getX() + dx[player]][position.getY() + dy[player]].isNull())output.add(new Position(position.getX() + dx[player], position.getY() + dy[player]));
+
+        return output;
+    }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int[] dx = new int[]{0, 1, 0, -1};

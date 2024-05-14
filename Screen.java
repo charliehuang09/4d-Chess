@@ -42,10 +42,10 @@ public class Screen extends JPanel implements MouseListener{
         points = new int[] {0, 0, 0, 0};
         boardClass = new Board();
         board = boardClass.getBoard();
-        board[6][6].setPiece(new King(new Position(6, 6), 0));
-        board[6][7].setPiece(new Queen(new Position(6, 7), 0));
-        board[8][8].setPiece(new Rook(new Position(8, 8), 0));
-        board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
+        // board[6][6].setPiece(new King(new Position(6, 6), 0));
+        // board[6][7].setPiece(new Queen(new Position(6, 7), 0));
+        // board[8][8].setPiece(new Rook(new Position(8, 8), 0));
+        // board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
         
         kings = new King[] {(King) board[6][0].getPiece(), (King) board[0][6].getPiece(), (King) board[7][13].getPiece(), (King) board[13][7].getPiece()};
         for (Piece element : kings){
@@ -152,7 +152,7 @@ public class Screen extends JPanel implements MouseListener{
         board[currentSelect.getX()][currentSelect.getY()].move();
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
-        return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
+        return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board, new Position(nextSelect.getX(), nextSelect.getY()));
     }
     public void move() { //successful moving
         if (nextSelect != null) {

@@ -21,7 +21,7 @@ public abstract class Piece {
             ArrayList<Position> moves = getValidMoves(board);
 
             for (Position move : moves){
-                //if (isValidMove(this.getPosition(), move, board, kings));
+                if (isValidMove(this.getPosition(), move, board, kings))
                 g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10); //remove for efficiancy
             }
         }
@@ -37,8 +37,6 @@ public abstract class Piece {
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
         King king = kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()];
-        System.out.println(king);
-        System.out.println(kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board));
         return !kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
     }
     
@@ -64,6 +62,9 @@ public abstract class Piece {
     }
     public String toString(){
         return this.getPlayer() + ": " + this.getName() + this.getPosition().toString();
+    }
+    public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
+        return this.getValidMoves(board);
     }
     public void move() { }
     

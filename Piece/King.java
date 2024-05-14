@@ -31,9 +31,12 @@ public class King extends Piece{
     public boolean inCheck(BoardSquare[][] board, Position position){
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
-                System.out.println(this.player);
-                if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player && board[i][j].getName() != "King"){
-                    ArrayList<Position> moves = board[i][j].getValidMoves(board);
+                if (!board[i][j].isNull() && !board[i][j].isBlank() && board[i][j].getPlayer() != this.player && !board[i][j].getName().equals("King")){
+                    ArrayList<Position> moves = board[i][j].getAttackingMoves(board);
+                    if (board[i][j].getName().equals("Pawn")){
+                        System.out.println(moves);
+                        System.out.println(position);
+                    }
                     for (Position move : moves){
                         if (move.equals(position)) return true;
                     }
@@ -43,7 +46,6 @@ public class King extends Piece{
         return false;
     }
     public boolean inCheck(BoardSquare[][] board){
-        System.out.println("name");
         return this.inCheck(board, this.position.clone());
     }
     @Override
