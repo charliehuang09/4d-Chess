@@ -255,6 +255,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     for (King king : kings){
                         if (king.getPlayer() != tmp) points[tmp] += checkMateDetection(king);
                     }
+                    updateTurn();
                     System.out.println(points);
 
                     for (int i = 0; i < points.length; i++) {
@@ -273,7 +274,12 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     public void changeTurn() {
         turn++;
         turn %= 4;
-        System.out.println(turn);
+    }
+    public void updateTurn(){
+        while(kings[turn].getValue() == 0){
+            turn++;
+            turn %= 4;
+        }
     }
     public void mousePressed(MouseEvent e) {
 
