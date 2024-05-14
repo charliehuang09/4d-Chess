@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import Piece.Bishop;
@@ -35,13 +37,29 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
+    private JButton startGameButton;
+    private JLabel ChessLabel;
     private King[] kings;
     private int turn; 
 
     public Screen() {
         setLayout(null);
         setFocusable(true);
-        
+
+        startGameButton = new JButton();
+        startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
+        startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
+        startGameButton.setBounds(790, 644, 350, 70);
+        startGameButton.setText("Start");
+        this.add(startGameButton);
+        startGameButton.addActionListener(this);
+
+        ChessLabel = new JLabel();
+        ChessLabel.setFont(new Font("Arial", Font.BOLD, 250));
+        ChessLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        ChessLabel.setBounds(590, 172, 750, 300);
+        ChessLabel.setText("Chess");
+        this.add(ChessLabel);
     
     }
     public void startGame() {
@@ -287,8 +305,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     public void mouseClicked(MouseEvent e) {}
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ) {
-
+        if (e.getSource() == startGameButton) {
+            startGameButton.setVisible(false);
+            ChessLabel.setVisible(false);
+            startGame();
+            //drawBoard(g);
         }
     }
 }
