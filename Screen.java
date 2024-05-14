@@ -55,6 +55,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         startGameButton.setText("Start");
         this.add(startGameButton);
         startGameButton.addActionListener(this);
+        startGameButton.setVisible(false);
         
 
         ChessLabel = new JLabel();
@@ -63,7 +64,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         ChessLabel.setBounds(590, 172, 750, 300);
         ChessLabel.setText("Chess");
         this.add(ChessLabel);
+        ChessLabel.setVisible(false);
         
+        startGame();
         alive = 4;
     
     }
