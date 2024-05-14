@@ -150,10 +150,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     }
 
     public void drawBoard(Graphics g) {
-        player0Score.setVisible(false);
-        player1Score.setVisible(false);
-        player2Score.setVisible(false);
-        player3Score.setVisible(false);
+        player0Score.setVisible(true);
+        player1Score.setVisible(true);
+        player2Score.setVisible(true);
+        player3Score.setVisible(true);
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
                 board[i][j].drawBoard(g, i, j);
