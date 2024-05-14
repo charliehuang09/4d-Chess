@@ -101,6 +101,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         player0Score.setBounds(tempX+-20, tempY+650, 200, 30);
         player0Score.setText("Blue: " + points[0]);
         this.add(player0Score);
+        player0Score.setVisible(false);
 
         player1Score = new JLabel();
         player1Score.setFont(new Font("Arial", Font.BOLD, 35));
@@ -108,6 +109,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         player1Score.setBounds(tempX-20, tempY+40, 200, 30);
         player1Score.setText("Green: " + points[1]);
         this.add(player1Score);
+        player1Score.setVisible(false);
 
         player2Score = new JLabel();
         player2Score.setFont(new Font("Arial", Font.BOLD, 35));
@@ -115,6 +117,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         player2Score.setBounds(tempX + 575, tempY + 70, 200, 30);
         player2Score.setText("Red: " + points[2]);
         this.add(player2Score);
+        player2Score.setVisible(false);
 
         player3Score = new JLabel();
         player3Score.setFont(new Font("Arial", Font.BOLD, 35));
@@ -122,6 +125,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         player3Score.setBounds(tempX + 575, tempY + 575, 200, 30);
         player3Score.setText("Yellow: " + points[3]);
         this.add(player3Score);
+        player3Score.setVisible(false);
     }
     public Dimension getPreferredSize(){
         return new Dimension(1920,1080);
@@ -135,6 +139,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     }
 
     public void drawBoard(Graphics g) {
+        player0Score.setVisible(false);
+        player1Score.setVisible(false);
+        player2Score.setVisible(false);
+        player3Score.setVisible(false);
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
                 board[i][j].drawBoard(g, i, j);
