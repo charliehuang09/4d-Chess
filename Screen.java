@@ -41,6 +41,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JLabel ChessLabel;
     private King[] kings;
     private int turn; 
+    private int alive;
 
     public Screen() {
         setLayout(null);
@@ -63,6 +64,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         ChessLabel.setText("Chess");
         this.add(ChessLabel);
         
+        alive = 4;
     
     }
     public void startGame() {
@@ -176,12 +178,14 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         return location;
     }
     public void kill(int player){
-        System.out.println("Kill");
-        System.out.println(player);
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
                 if (board[i][j].getPlayer() == player) board[i][j].kill();
             }
+        }
+        alive--;
+        if (alive == 1){
+            //go back to menu
         }
     }
     public int checkMateDetection(King king){
