@@ -65,7 +65,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         backToMenu = new JButton();
         backToMenu.setFont(new Font("Arial", Font.BOLD, 75));
         backToMenu.setHorizontalAlignment(SwingConstants.CENTER);
-        backToMenu.setBounds(790, 644, 350, 70);
+        backToMenu.setBounds(790, 644, 700, 70);
         backToMenu.setText("Back To Menu");
         this.add(backToMenu);
         backToMenu.addActionListener(this);
