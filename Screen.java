@@ -125,7 +125,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        g.setColor(new Color(205,170,125));
+        g.fillRect(0,0,1920,1080);
         drawBoard(g);
     }
 
