@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
 import Piece.Bishop;
@@ -18,7 +21,7 @@ import Piece.Queen;
 import Piece.Rook;
 import Piece.King;
 import Piece.Piece;
-public class Screen extends JPanel implements MouseListener{
+public class Screen extends JPanel implements MouseListener, ActionListener{
     private Board boardClass;
     private BoardSquare[][] board;
     private int x;
@@ -37,7 +40,11 @@ public class Screen extends JPanel implements MouseListener{
 
     public Screen() {
         setLayout(null);
-
+        setFocusable(true);
+        
+    
+    }
+    public void startGame() {
         turn = 3; //RED ALWAYS GOES FIRST
 
         points = new int[] {0, 0, 0, 0};
@@ -89,7 +96,6 @@ public class Screen extends JPanel implements MouseListener{
         player3Score.setBounds(tempX + 575, tempY + 575, 200, 30);
         player3Score.setText("Yellow: " + points[3]);
         this.add(player3Score);
-    
     }
     public Dimension getPreferredSize(){
         return new Dimension(1920,1080);
@@ -98,6 +104,10 @@ public class Screen extends JPanel implements MouseListener{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        
+    }
+
+    public void drawBoard(Graphics g) {
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
                 board[i][j].drawBoard(g, i, j);
@@ -269,11 +279,16 @@ public class Screen extends JPanel implements MouseListener{
 
     public void mouseReleased(MouseEvent e) {}
 
-
     public void mouseEntered(MouseEvent e) {}
 
     public void mouseExited(MouseEvent e) {}
 
 
     public void mouseClicked(MouseEvent e) {}
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == ) {
+
+        }
+    }
 }
