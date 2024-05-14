@@ -44,6 +44,17 @@ public class Queen extends Piece{
         this.image = super.resize(image);
     }
     @Override
+    public void kill(){
+        String path = "Assets" + "/" + "Dead" + "/" + this.name + ".png";
+        try {
+            this.image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+        this.image = super.resize(image);
+        this.value = 0;
+    }
+    @Override
     public Piece clone(){
         return new Queen(this.position.clone(), this.player);
     }

@@ -28,6 +28,17 @@ public class King extends Piece{
         }
         this.image = super.resize(image);
     }
+    @Override
+    public void kill(){
+        String path = "Assets" + "/" + "Dead" + "/" + this.name + ".png";
+        try {
+            this.image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+        this.image = super.resize(image);
+        this.value = 0;
+    }
     public boolean inCheck(BoardSquare[][] board, Position position){
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board[i].length; j++){
