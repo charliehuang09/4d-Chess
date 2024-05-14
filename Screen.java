@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.plaf.TreeUI;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -38,6 +40,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JLabel player2Score;
     private JLabel player1Score;
     private JButton startGameButton;
+    private JButton backToMenu;
     private JLabel ChessLabel;
     private King[] kings;
     private int turn; 
@@ -48,6 +51,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         setLayout(null);
         setFocusable(true);
 
+        inMenu = true;
+
         startGameButton = new JButton();
         startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
         startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,6 +60,17 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         startGameButton.setText("Start");
         this.add(startGameButton);
         startGameButton.addActionListener(this);
+        startGameButton.setVisible(true);
+
+        backToMenu = new JButton();
+        backToMenu.setFont(new Font("Arial", Font.BOLD, 75));
+        backToMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        backToMenu.setBounds(790, 644, 350, 70);
+        backToMenu.setText("Back To Menu");
+        this.add(backToMenu);
+        backToMenu.addActionListener(this);
+        backToMenu.setVisible(false);
+        
 
         ChessLabel = new JLabel();
         ChessLabel.setFont(new Font("Arial", Font.BOLD, 250));
@@ -80,9 +96,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         // board[9][9].setPiece(new Bishop(new Position(9, 9), 2));
         
         kings = new King[] {(King) board[6][0].getPiece(), (King) board[0][6].getPiece(), (King) board[7][13].getPiece(), (King) board[13][7].getPiece()};
-        for (Piece element : kings){
-            System.out.println(element);
-        }
         
 
         x = 200; //HERES THE COORDINATES FOR WHERE THE GRID STARTS
@@ -194,24 +207,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         }
         alive--;
         if (alive == 1){
-            //go back to menu
+            backToMenu.setVisible(true);
         }
     }
     public int checkMateDetection(King king){
-        System.out.println("Start");
-        // King king = this.kings[turn];
-        System.out.println(king.getPlayer());
         if (king.inCheck(board)){
-            System.out.println("In Check");
             for (int i = 0; i < this.board.length; i++){
                 for (int j = 0; j < this.board[i].length; j++){
-                    if (this.board[i][j].getPlayer() == turn){
+                    if (this.board[i][j].getPlayer() == king.getPlayer()){
                         ArrayList<Position> moves = board[i][j].getValidMoves(board);
                         for (Position move : moves){
                             if (isValidMove(board[i][j].getPosition(), move)){
                                 System.out.println(this.board[i][j].getName());
                                 System.out.println(move);
-                                System.out.println("No Checkmate");
                                 return 0;
                             }
                         }
@@ -221,7 +229,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             kill(king.getPlayer());
             return 20;
         }
-        System.out.println("No Checkmate");
         return 0;
     }
     public boolean isValidMove(Position currentSelect, Position nextSelect){
@@ -263,12 +270,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
 
                     int tmp = turn;
                     changeTurn();
-                    System.out.println(points);
                     for (King king : kings){
-                        if (king.getPlayer() != tmp) points[tmp] += checkMateDetection(king);
+                        if (king.getPlayer() != tmp && king.getValue() != 0) points[tmp] += checkMateDetection(king);
                     }
                     updateTurn();
-                    System.out.println(points);
 
                     for (int i = 0; i < points.length; i++) {
                         System.out.println(i + "has:" + points[i]);
@@ -344,7 +349,12 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ChessLabel.setVisible(false);
             inMenu = false;
             repaint();
-            
+        }
+        if (e.getSource() == backToMenu){
+            backToMenu.setVisible(false);
+            ChessLabel.setVisible(true);
+            inMenu = true;
+            repaint();
         }
     }
 }
