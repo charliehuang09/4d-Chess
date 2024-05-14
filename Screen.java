@@ -42,12 +42,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private King[] kings;
     private int turn; 
     private int alive;
+    private boolean inMenu;
 
     public Screen() {
         setLayout(null);
         setFocusable(true);
 
-
+        inMenu = true;
         startGameButton = new JButton();
         startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
         startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,7 +56,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         startGameButton.setText("Start");
         this.add(startGameButton);
         startGameButton.addActionListener(this);
-        startGameButton.setVisible(false);
+        startGameButton.setVisible(true);
         
 
         ChessLabel = new JLabel();
@@ -135,7 +136,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         super.paintComponent(g);
         g.setColor(new Color(205,170,125));
         g.fillRect(0,0,1920,1080);
-        drawBoard(g);
+        if (!inMenu) drawBoard(g);
     }
 
     public void drawBoard(Graphics g) {
@@ -344,6 +345,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         if (e.getSource() == startGameButton) {
             startGameButton.setVisible(false);
             ChessLabel.setVisible(false);
+            inMenu = false;
+            repaint();
             
         }
     }
