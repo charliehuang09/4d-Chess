@@ -352,6 +352,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ChessLabel.setVisible(false);
             backToMenu.setVisible(true);
             inMenu = false;
+            startGame();
             repaint();
         }
         if (e.getSource() == backToMenu){
