@@ -143,7 +143,7 @@ public class Screen extends JPanel implements MouseListener{
         x = tempX;
         return location;
     }
-    public void checkMateDetection(){
+    public int checkMateDetection(){
         System.out.println("Start");
         King king = this.kings[turn];
         System.out.println(king.getPlayer());
@@ -158,17 +158,17 @@ public class Screen extends JPanel implements MouseListener{
                                 System.out.println(this.board[i][j].getName());
                                 System.out.println(move);
                                 System.out.println("No Checkmate");
-                                return;
+                                return 0;
                             }
                         }
                     }
                 }
             }
             System.out.println("Checkmate Detected");
-            return;
+            return 20;
         }
         System.out.println("No Checkmate");
-        return;
+        return 0;
     }
     public boolean isValidMove(Position currentSelect, Position nextSelect){
         BoardSquare[][] board = new BoardSquare[this.board.length][this.board[0].length];
@@ -199,16 +199,6 @@ public class Screen extends JPanel implements MouseListener{
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
 
-                    
-                
-                    for (int i = 0; i < points.length; i++) {
-                        System.out.println(i + "has:" + points[i]);
-                    }
-                    player0Score.setText("Blue: " + points[0]);
-                    player1Score.setText("Green: " + points[1]);
-                    player2Score.setText("Red: " + points[2]);
-                    player3Score.setText("Yellow: " + points[3]);
-
 
                     board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
@@ -217,8 +207,19 @@ public class Screen extends JPanel implements MouseListener{
                     currentSelect = null;
                     nextSelect = null;
 
+                    int tmp = turn;
                     changeTurn();
-                    checkMateDetection();
+                    System.out.println(points);
+                    points[tmp] += checkMateDetection();
+                    System.out.println(points);
+
+                    for (int i = 0; i < points.length; i++) {
+                        System.out.println(i + "has:" + points[i]);
+                    }
+                    player0Score.setText("Blue: " + points[0]);
+                    player1Score.setText("Green: " + points[1]);
+                    player2Score.setText("Red: " + points[2]);
+                    player3Score.setText("Yellow: " + points[3]);
 
                 }
             }
