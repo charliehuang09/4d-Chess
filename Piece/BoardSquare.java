@@ -122,4 +122,7 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public Position getPosition(){
         return piece.getPosition();
     }
+    public void kill(){
+        this.piece.kill();
+    }
 }

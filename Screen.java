@@ -153,9 +153,18 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         x = tempX;
         return location;
     }
-    public int checkMateDetection(){
+    public void kill(int player){
+        System.out.println("Kill");
+        System.out.println(player);
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board[i].length; j++){
+                if (board[i][j].getPlayer() == player) board[i][j].kill();
+            }
+        }
+    }
+    public int checkMateDetection(King king){
         System.out.println("Start");
-        King king = this.kings[turn];
+        // King king = this.kings[turn];
         System.out.println(king.getPlayer());
         if (king.inCheck(board)){
             System.out.println("In Check");
@@ -174,7 +183,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     }
                 }
             }
-            System.out.println("Checkmate Detected");
+            kill(king.getPlayer());
             return 20;
         }
         System.out.println("No Checkmate");
@@ -220,7 +229,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     int tmp = turn;
                     changeTurn();
                     System.out.println(points);
-                    points[tmp] += checkMateDetection();
+                    for (King king : kings){
+                        if (king.getPlayer() != tmp) points[tmp] += checkMateDetection(king);
+                    }
                     System.out.println(points);
 
                     for (int i = 0; i < points.length; i++) {

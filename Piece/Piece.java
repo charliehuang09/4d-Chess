@@ -3,7 +3,6 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
 import Piece.Piece;
-import Piece.Position;
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
@@ -15,7 +14,8 @@ public abstract class Piece {
     public abstract String getName();
     public abstract void updatePos(Position pos);
     public abstract Piece clone();
-
+    
+    public void kill(){ }
     public void drawMoves(Graphics g, String select, BoardSquare[][] board, King[] kings){
         if (select == "current"){
             ArrayList<Position> moves = getValidMoves(board);
