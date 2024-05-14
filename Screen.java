@@ -185,7 +185,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             }
         }
         alive--;
-        if (alive == 0){
+        if (alive == 1){
             //go back to menu
         }
     }
