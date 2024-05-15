@@ -250,6 +250,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
+                    if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
+                        at.playCapture();
+                    } else {
+                        at.playMove();
+                    }
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
                     
@@ -316,11 +321,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                 System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
                 nextSelect = pos;
-                if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
-                    at.playCapture();
-                } else {
-                    at.playMove();
-                }
+                
             } else if (currentSelect != null){ //if the current selection is already made and want to be canceled
                 // System.out.println("reset current and next");
                 board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
