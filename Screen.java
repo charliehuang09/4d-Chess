@@ -10,11 +10,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import Piece.BlankSquare;
 import Piece.BoardSquare;
 import Piece.Position;
 import Piece.King;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 public class Screen extends JPanel implements MouseListener, ActionListener{
     private Board boardClass;
     private BoardSquare[][] board;
@@ -33,6 +39,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JButton backToMenu;
     private JLabel ChessLabel;
     private King[] kings;
+    private BufferedImage StartGameButtonImage;
     private int turn; 
     private int alive;
     private boolean inMenu;
@@ -53,6 +60,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         this.add(startGameButton);
         startGameButton.addActionListener(this);
         startGameButton.setVisible(true);
+
+        String pathStartGameButtonImage = "Assets" + "/" + "Images" + "/" + "StartGame" + ".png";
+        try {
+            StartGameButtonImage = ImageIO.read(new File(pathStartGameButtonImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
 
         backToMenu = new JButton();
         backToMenu.setFont(new Font("Arial", Font.BOLD, 75));
@@ -141,7 +155,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         super.paintComponent(g);
         g.setColor(new Color(205,170,125));
         g.fillRect(0,0,1920,1080);
-        if (!inMenu) drawBoard(g);
+        if (inMenu == false) {
+            drawBoard(g);
+        } else {
+            player0Score.setVisible(false);
+            player1Score.setVisible(false);
+            player2Score.setVisible(false);
+            player3Score.setVisible(false);
+            g.drawImage(StartGameButtonImage, 525, 450, null);
+        }
     }
 
     public void drawBoard(Graphics g) {
