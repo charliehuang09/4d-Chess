@@ -13,7 +13,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.net.URL;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -46,10 +48,12 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private int turn; 
     private int alive;
     private boolean inMenu;
+    private AudioPlayer at;
 
     public Screen() {
         setLayout(null);
         setFocusable(true);
+        at = new AudioPlayer();
 
         inMenu = true;
 
@@ -260,6 +264,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
+                    
+                    if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
+                        at.playCapture();
+                    } else {
+                        at.playMove();
+                    }
+                    
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
 
