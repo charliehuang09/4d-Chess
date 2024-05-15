@@ -162,8 +162,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             player1Score.setVisible(false);
             player2Score.setVisible(false);
             player3Score.setVisible(false);
-            g.drawImage(StartGameButtonImage, 525, 450, null);
+            g.drawImage(StartGameButtonImage, 525, 425, null);
         }
+        g.setColor(new Color(0,0,0));
+        //g.fillRect(0,680,1920,10);
     }
 
     public void drawBoard(Graphics g) {
@@ -323,6 +325,18 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             turn %= 4;
         }
     }
+    public void checkMouseStartButton(int mX, int mY) {
+        
+        if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
+            System.out.println("Start Button Pressed");
+            startGameButton.setVisible(false);
+            ChessLabel.setVisible(false);
+            backToMenu.setVisible(true);
+            inMenu = false;
+            startGame();
+            repaint();
+        }
+    }
     public void mousePressed(MouseEvent e) {
 
         int mX = e.getX();
@@ -355,6 +369,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         } else {
             System.out.println("Position is null");
         }
+        checkMouseStartButton(mX,mY);
         move(); //checks if a move has been made and calculates the resulting change
         repaint();
     }
