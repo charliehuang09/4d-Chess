@@ -35,7 +35,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
-    private JButton startGameButton;
+    //private JButton startGameButton;
     private JButton backToMenu;
     private JLabel ChessLabel;
     private King[] kings;
@@ -52,6 +52,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
 
         inMenu = true;
 
+        /* 
         startGameButton = new JButton();
         startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
         startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,6 +61,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         this.add(startGameButton);
         startGameButton.addActionListener(this);
         startGameButton.setVisible(true);
+        */
 
         String pathStartGameButtonImage = "Assets" + "/" + "Images" + "/" + "StartGame" + ".png";
         try {
@@ -326,15 +328,16 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         }
     }
     public void checkMouseStartButton(int mX, int mY) {
-        
-        if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
-            System.out.println("Start Button Pressed");
-            startGameButton.setVisible(false);
-            ChessLabel.setVisible(false);
-            backToMenu.setVisible(true);
-            inMenu = false;
-            startGame();
-            repaint();
+        if (inMenu == true) {
+            if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
+                System.out.println("Start Button Pressed");
+                //startGameButton.setVisible(false);
+                ChessLabel.setVisible(false);
+                backToMenu.setVisible(true);
+                inMenu = false;
+                startGame();
+                repaint();
+            }
         }
     }
     public void mousePressed(MouseEvent e) {
@@ -385,6 +388,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     public void mouseClicked(MouseEvent e) {}
 
     public void actionPerformed(ActionEvent e) {
+        /*
         if (e.getSource() == startGameButton) {
             startGameButton.setVisible(false);
             ChessLabel.setVisible(false);
@@ -393,9 +397,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             startGame();
             repaint();
         }
+        */
         if (e.getSource() == backToMenu){
             backToMenu.setVisible(false);
-            startGameButton.setVisible(true);
+            //startGameButton.setVisible(true);
             ChessLabel.setVisible(true);
             player0Score.setVisible(false);
             player1Score.setVisible(false);
