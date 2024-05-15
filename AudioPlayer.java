@@ -1,11 +1,8 @@
-import java.io.*;
-import javax.sound.sampled.*;
+
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 public class AudioPlayer {
-    private Clip hit;
-    private Clip stand;
     public void playCapture() {
         String path = "Assets" + "\\"  + "Sounds" + "\\"  + "capture.wav";
         System.out.println("Path");

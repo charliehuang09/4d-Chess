@@ -2,31 +2,19 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.event.MouseListener;
-import java.lang.Character.Subset;
 import java.util.ArrayList;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.TreeUI;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import Piece.Bishop;
 import Piece.BlankSquare;
 import Piece.BoardSquare;
 import Piece.Position;
-import Piece.Queen;
-import Piece.Rook;
 import Piece.King;
-import Piece.Piece;
 public class Screen extends JPanel implements MouseListener, ActionListener{
     private Board boardClass;
     private BoardSquare[][] board;
