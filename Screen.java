@@ -253,11 +253,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
                     
-                    if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
-                        at.playCapture();
-                    } else {
-                        at.playMove();
-                    }
+                    
                     
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
@@ -320,6 +316,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                 System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
                 nextSelect = pos;
+                if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
+                    at.playCapture();
+                } else {
+                    at.playMove();
+                }
             } else if (currentSelect != null){ //if the current selection is already made and want to be canceled
                 // System.out.println("reset current and next");
                 board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
