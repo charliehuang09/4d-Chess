@@ -276,6 +276,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
+                    BoardSquare soundTemp = board[currentSelect.getX()][currentSelect.getY()];
                     
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
@@ -301,11 +302,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                         }
                         
                     }
-                    System.out.println("Kings in Check");
+                    //System.out.println("Kings in Check");
                     for (King king : kingsInCheck) {
-                        System.out.println(" -" + king.getPosition().toString());
+                        //System.out.println(" -" + king.getPosition().toString());
                     }
-                    System.out.println();
+                    //System.out.println();
 
                     //System.out.println(board[nextSelect.getX()][nextSelect.getY()].getPiece().getName());
                     boolean playCheckSoundValidPiece = false;
@@ -321,21 +322,23 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                             }
                         }
                     }
-                    System.out.println("AttackingMoves");
+                    //System.out.println("AttackingMoves");
                     for (Position pos: AttackingMoves) {
-                        System.out.println(" -" + pos.toString());
+                        //System.out.println(" -" + pos.toString());
                     }
-                    System.out.println();
+                    //System.out.println();
+                    System.out.println(soundTemp.getPiece().getName());
                     if (playCheckSoundKing == true && playCheckSoundValidPiece == true) {
                         at.playCheck();
                         //System.out.println("Play Check");
-                    }   else if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
-                        at.playCapture();
-                        //System.out.println("Play Capture");
-                    } else {
+                    } else if (soundTemp.getPiece().getName() == "BlankSquare") {
                         at.playMove();
-                        //System.out.println("Play Move");
+                        System.out.println("Play Move");
+                    } else {
+                        at.playCapture();
+                        System.out.println("Play Capture");
                     }
+                    
                     currentSelect = null;
                     nextSelect = null;
 
