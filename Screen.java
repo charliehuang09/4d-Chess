@@ -276,11 +276,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
-                    if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
-                        at.playCapture();
-                    } else {
-                        at.playMove();
-                    }
+                    
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
                     
@@ -294,8 +290,25 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
                     board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+
+                    boolean playCheckSound = false;
+                    for (King king : kings) {
+                        if (king.inCheck(board)) playCheckSound = true;
+                    }
+                    if (playCheckSound == true) {
+                        at.playCheck();
+                        //System.out.println("Play Check");
+                    }   else if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
+                        at.playCapture();
+                        //System.out.println("Play Capture");
+                    } else {
+                        at.playMove();
+                        //System.out.println("Play Move");
+                    }
                     currentSelect = null;
                     nextSelect = null;
+
+                    
 
                     int tmp = turn;
                     changeTurn();
@@ -305,7 +318,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     updateTurn();
 
                     for (int i = 0; i < points.length; i++) {
-                        System.out.println(i + "has:" + points[i]);
+                        //System.out.println(i + "has:" + points[i]);
                     }
                     player0Score.setText("Blue: " + points[0]);
                     player1Score.setText("Green: " + points[1]);
@@ -330,7 +343,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     public void checkMouseStartButton(int mX, int mY) {
         if (inMenu == true) {
             if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
-                System.out.println("Start Button Pressed");
+                //System.out.println("Start Button Pressed");
                 //startGameButton.setVisible(false);
                 ChessLabel.setVisible(false);
                 backToMenu.setVisible(true);
