@@ -14,6 +14,7 @@ public abstract class Piece {
     public abstract String getName();
     public abstract void updatePos(Position pos);
     public abstract Piece clone();
+    public abstract boolean hasMoved();
     
     public void kill(){ }
     public void drawMoves(Graphics g, String select, BoardSquare[][] board, King[] kings){

@@ -13,12 +13,14 @@ public class Pawn extends Piece{
     private String name;
     private BufferedImage image;
     private boolean startingPos;
+    private boolean hasMoved;
     public Pawn(Position position, int player){
         this.value = 1;
         this.player = player;
         this.position = position;
         this.name = "Pawn";
         this.startingPos = true;
+        this.hasMoved = false;
 
         String[] teams = new String[] {"Blue", "Green", "Red", "Yellow"};
         String path = "Assets" + "/" + teams[player] + "/" + this.name + ".png";
@@ -28,6 +30,10 @@ public class Pawn extends Piece{
             System.out.println("Failed");
         }
         this.image = super.resize(image);
+    }
+    @Override
+    public boolean hasMoved(){
+        return this.hasMoved;
     }
     @Override
     public void kill(){
@@ -124,6 +130,7 @@ public class Pawn extends Piece{
     }
     @Override 
     public void move(){
-        startingPos = false;
+        this.startingPos = false;
+        this.hasMoved = true;
     }
 }
