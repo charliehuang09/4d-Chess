@@ -2,3 +2,7 @@ turning system:
 have a instance variable represents the team number from 0 to 3 inclusive
 when making the first selection in the mouse listener class, make so it only selects if the piece's team matches the piece's player
 when a move is executed, change the turn
+
+checking for checking sound:
+check if the nextselect is correct peice; checked
+check which if statements are being passed;

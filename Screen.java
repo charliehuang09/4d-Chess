@@ -239,8 +239,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                         ArrayList<Position> moves = board[i][j].getValidMoves(board);
                         for (Position move : moves){
                             if (isValidMove(board[i][j].getPosition(), move)){
-                                System.out.println(this.board[i][j].getName());
-                                System.out.println(move);
+                                //System.out.println(this.board[i][j].getName());
+                                //System.out.println(move);
                                 return 0;
                             }
                         }
@@ -291,11 +291,42 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
                     board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
 
-                    boolean playCheckSound = false;
+                    boolean playCheckSoundKing = false;
+                    ArrayList<King> kingsInCheck = new ArrayList<King>();
                     for (King king : kings) {
-                        if (king.inCheck(board)) playCheckSound = true;
+                        if (king.inCheck(board)) {
+                            playCheckSoundKing = true;
+                            System.out.println("playChecKsoundking set to true");
+                            kingsInCheck.add(king);
+                        }
+                        
                     }
-                    if (playCheckSound == true) {
+                    System.out.println("Kings in Check");
+                    for (King king : kingsInCheck) {
+                        System.out.println(" -" + king.getPosition().toString());
+                    }
+                    System.out.println();
+
+                    //System.out.println(board[nextSelect.getX()][nextSelect.getY()].getPiece().getName());
+                    boolean playCheckSoundValidPiece = false;
+                    ArrayList<Position> AttackingMoves = board[nextSelect.getX()][nextSelect.getY()].getAttackingMoves(board);
+                    if (kingsInCheck.size() != 0) {
+                        //System.out.println("King Size Passed");
+                        for (int i = 0; i < AttackingMoves.size(); i++) {
+                            for (int k = 0; k < kingsInCheck.size(); k++) {
+                                if (kingsInCheck.get(k).getPosition().toString().equals(AttackingMoves.get(i).toString())) {
+                                    System.out.println("playCheckSoundValidPiece set to true");
+                                    playCheckSoundValidPiece = true;
+                                }
+                            }
+                        }
+                    }
+                    System.out.println("AttackingMoves");
+                    for (Position pos: AttackingMoves) {
+                        System.out.println(" -" + pos.toString());
+                    }
+                    System.out.println();
+                    if (playCheckSoundKing == true && playCheckSoundValidPiece == true) {
                         at.playCheck();
                         //System.out.println("Play Check");
                     }   else if (board[nextSelect.getX()][nextSelect.getY()].isBlank() == false) {
@@ -358,7 +389,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         int mX = e.getX();
         int mY = e.getY();
         //Print location of x and y
-        System.out.println("Clicked X: " + mX + ", Y: " + mY);
+        //System.out.println("Clicked X: " + mX + ", Y: " + mY);
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
             if (currentSelect == null) { 
@@ -370,7 +401,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     }
                 }
             } else if (nextSelect == null) { //piece to an empty square
-                System.out.println("set next");
+                //System.out.println("set next");
                 board[pos.getX()][pos.getY()].changeSelect("next");
                 nextSelect = pos;
                 
