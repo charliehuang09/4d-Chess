@@ -27,7 +27,7 @@ public class AudioPlayer {
             exc.printStackTrace(System.out);
         }
     }public void playCheck() {
-        String path = "Asset/Sounds/move-self.wav";
+        String path = "Assets/Sounds/move-check.wav";
         System.out.println("Path");
         try {
             URL url = this.getClass().getClassLoader().getResource(path);

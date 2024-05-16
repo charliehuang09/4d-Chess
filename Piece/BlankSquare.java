@@ -7,6 +7,10 @@ public class BlankSquare extends Piece{ //a class to represent a square that is 
         return false;
     }
     @Override
+    public boolean hasMoved(){
+        return true;
+    }
+    @Override
     public Piece clone(){
         return new BlankSquare();
     }

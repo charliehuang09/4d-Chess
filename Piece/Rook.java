@@ -13,11 +13,13 @@ public class Rook extends Piece{
     private int player;
     private String name;
     private BufferedImage image;
+    private boolean hasMoved;
     public Rook(Position position, int player){
         this.value = 5;
         this.player = player;
         this.position = position;
         this.name = "Rook";
+        this.hasMoved = false;
 
         String[] teams = new String[] {"Blue", "Green", "Red", "Yellow"};
         String path = "Assets" + "/" + teams[player] + "/" + this.name + ".png";
@@ -27,6 +29,14 @@ public class Rook extends Piece{
             System.out.println("Failed");
         }
         this.image = super.resize(image);
+    }
+    @Override
+    public boolean hasMoved(){
+        return this.hasMoved;
+    }
+    @Override
+    public void move(){
+        this.hasMoved = true;
     }
     @Override
     public void kill(){

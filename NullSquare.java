@@ -11,6 +11,9 @@ public class NullSquare extends Piece{ //to represent a null square
         this.position = position;
         return false;
     }
+    public boolean hasMoved(){
+        return false;
+    }
     public int getPlayer() {
         return -1;
     }
