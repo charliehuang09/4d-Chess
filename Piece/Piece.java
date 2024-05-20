@@ -2,7 +2,7 @@ package Piece;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
-import Piece.Piece;
+
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
@@ -22,8 +22,12 @@ public abstract class Piece {
             ArrayList<Position> moves = getValidMoves(board);
 
             for (Position move : moves){
-                // if (isValidMove(this.getPosition(), move, board, kings))
-                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10); //remove for efficiancy
+                if (!Config.fastRender){
+                    if (isValidMove(this.getPosition(), move, board, kings)) g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+                }
+                else{
+                    g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+                }
             }
         }
     }
