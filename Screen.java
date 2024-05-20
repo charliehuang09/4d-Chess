@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import Piece.BlankSquare;
 import Piece.BoardSquare;
+import Piece.Config;
 import Piece.Position;
 import Piece.King;
 import java.awt.image.BufferedImage;
@@ -36,6 +37,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
     private JLabel player1Score;
     //private JButton startGameButton;
     private JButton backToMenu;
+    private JButton fastRender;
     private JLabel ChessLabel;
     private King[] kings;
     private BufferedImage StartGameButtonImage;
@@ -77,6 +79,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         this.add(backToMenu);
         backToMenu.addActionListener(this);
         backToMenu.setVisible(false);
+
+        fastRender = new JButton();
+        fastRender.setFont(new Font("Arial", Font.PLAIN, 10));
+        fastRender.setBounds(1150, 25, 150, 50);
+        fastRender.setText("Turn On Fastrender");
+        this.add(fastRender);
+        fastRender.addActionListener(this);
         
 
         ChessLabel = new JLabel();
@@ -85,7 +94,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         ChessLabel.setBounds(192, 39, 1000, 300);
         ChessLabel.setText("Chess");
         this.add(ChessLabel);
-        
         
         startGame();
         
@@ -459,6 +467,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             repaint();
         }
         */
+        if (e.getSource() == fastRender){
+            if (Config.fastRender == true){
+                fastRender.setText("Turn On Fastrender");
+            } else{
+                fastRender.setText("Turn Off Fastrender");
+            }
+            Config.fastRender = !Config.fastRender;
+            repaint();
+        }
         if (e.getSource() == backToMenu){
             backToMenu.setVisible(false);
             //startGameButton.setVisible(true);
