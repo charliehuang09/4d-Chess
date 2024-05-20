@@ -2,6 +2,7 @@
 import java.net.URL;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
 public class AudioPlayer {
     public void playCapture() {
         String path = "Assets/Sounds/capture.wav";
@@ -15,6 +16,7 @@ public class AudioPlayer {
             exc.printStackTrace(System.out);
         }
     }
+
     public void playMove() {
         String path = "Assets/Sounds/move-self.wav";
         System.out.println("Path");
@@ -26,7 +28,9 @@ public class AudioPlayer {
         } catch (Exception exc) {
             exc.printStackTrace(System.out);
         }
-    }public void playCheck() {
+    }
+
+    public void playCheck() {
         String path = "Assets/Sounds/move-check.wav";
         System.out.println("Path");
         try {
@@ -37,5 +41,5 @@ public class AudioPlayer {
         } catch (Exception exc) {
             exc.printStackTrace(System.out);
         }
-    }    
+    }
 }
