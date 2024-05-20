@@ -276,12 +276,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
-                    BoardSquare soundTemp = board[currentSelect.getX()][currentSelect.getY()];
+                    BoardSquare soundTemp = board[nextSelect.getX()][nextSelect.getY()];
+                    
+                    int player0Points = points[0];
+                    int player1Points = points[1];
+                    int player2Points = points[2];
+                    int player3Points = points[3];
                     
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
                     board[currentSelect.getX()][currentSelect.getY()].move();
-                    
-                    
                     
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare()); //this must be blank for the valid move system to work (i think)
@@ -302,13 +305,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                         }
                         
                     }
-                    //System.out.println("Kings in Check");
-                    for (King king : kingsInCheck) {
-                        //System.out.println(" -" + king.getPosition().toString());
-                    }
-                    //System.out.println();
-
-                    //System.out.println(board[nextSelect.getX()][nextSelect.getY()].getPiece().getName());
+                    
                     boolean playCheckSoundValidPiece = false;
                     ArrayList<Position> AttackingMoves = board[nextSelect.getX()][nextSelect.getY()].getAttackingMoves(board);
                     if (kingsInCheck.size() != 0) {
@@ -327,16 +324,22 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                         //System.out.println(" -" + pos.toString());
                     }
                     //System.out.println();
-                    System.out.println(soundTemp.getPiece().getName());
+
+                    boolean playCaptureBool = false;
+                    if (player0Points < points[0] || player1Points < points[1] || player2Points < points[2] || player3Points < points[3]) {
+                        playCaptureBool = true;
+                    }
+                    
+                    //System.out.println(soundTemp.getPiece().getName());
                     if (playCheckSoundKing == true && playCheckSoundValidPiece == true) {
                         at.playCheck();
                         //System.out.println("Play Check");
-                    } else if (soundTemp.getPiece().getName() == "BlankSquare") {
-                        at.playMove();
-                        System.out.println("Play Move");
-                    } else {
+                    } else if (playCaptureBool == true) {
                         at.playCapture();
                         System.out.println("Play Capture");
+                    } else {
+                        at.playMove();
+                        System.out.println("Play Move");
                     }
                     
                     currentSelect = null;
