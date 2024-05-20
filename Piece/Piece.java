@@ -2,7 +2,7 @@ package Piece;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import java.util.ArrayList;
-import Piece.Piece;
+
 public abstract class Piece {
     public abstract boolean isValidMove(Position position, BoardSquare[][] board);
     public abstract int getPlayer();
@@ -22,8 +22,12 @@ public abstract class Piece {
             ArrayList<Position> moves = getValidMoves(board);
 
             for (Position move : moves){
-                // if (isValidMove(this.getPosition(), move, board, kings))
-                g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10); //remove for efficiancy
+                if (!Config.fastRender){
+                    if (isValidMove(this.getPosition(), move, board, kings)) g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+                }
+                else{
+                    g.fillOval(move.getCoordY(), move.getCoordX(), 10, 10);
+                }
             }
         }
     }
@@ -34,7 +38,7 @@ public abstract class Piece {
                 board[i][j] = inputBoard[i][j].clone();
             }
         }
-        board[currentSelect.getX()][currentSelect.getY()].move();
+        board[currentSelect.getX()][currentSelect.getY()].move(board);
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
         return !kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
@@ -66,6 +70,6 @@ public abstract class Piece {
     public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
         return this.getValidMoves(board);
     }
-    public void move() { }
+    public void move(BoardSquare[][] board) { }
     
 }

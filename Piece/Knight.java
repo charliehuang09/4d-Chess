@@ -35,7 +35,7 @@ public class Knight extends Piece{
         return this.hasMoved;
     }
     @Override
-    public void move(){
+    public void move(BoardSquare[][] board){
         this.hasMoved = true;
     }
     @Override

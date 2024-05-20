@@ -107,8 +107,8 @@ public class BoardSquare{ //make a class object for each square to make it easie
     public void drawMoves(Graphics g, BoardSquare[][] board, King[] kings){
         this.piece.drawMoves(g, select, board, kings);
     }
-    public void move(){
-        this.piece.move();
+    public void move(BoardSquare[][] board){
+        this.piece.move(board);
     }
     public int getValue(){
         return this.piece.getValue();
@@ -124,5 +124,8 @@ public class BoardSquare{ //make a class object for each square to make it easie
     }
     public void kill(){
         this.piece.kill();
+    }
+    public boolean hasMoved(){
+        return piece.hasMoved();
     }
 }

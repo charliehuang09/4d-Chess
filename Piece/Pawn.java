@@ -129,7 +129,7 @@ public class Pawn extends Piece{
         return this.value;
     }
     @Override 
-    public void move(){
+    public void move(BoardSquare[][] board){
         this.startingPos = false;
         this.hasMoved = true;
     }
