@@ -34,7 +34,7 @@ public abstract class Piece {
                 board[i][j] = inputBoard[i][j].clone();
             }
         }
-        board[currentSelect.getX()][currentSelect.getY()].move();
+        board[currentSelect.getX()][currentSelect.getY()].move(board);
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
         return !kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
@@ -66,6 +66,6 @@ public abstract class Piece {
     public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
         return this.getValidMoves(board);
     }
-    public void move() { }
+    public void move(BoardSquare[][] board) { }
     
 }

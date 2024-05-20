@@ -35,7 +35,41 @@ public class King extends Piece{
         return this.hasMoved;
     }
     @Override
-    public void move(){
+    public void move(BoardSquare[][] board){
+        if (!this.hasMoved){
+            System.out.println("------");
+            System.out.println(this.position);
+            System.out.println("------");
+            int[] dx;
+            int[] dy;
+            dx = new int[] {4, 0, 9, 13};
+            dy = new int[] {0, 4, 13, 9};
+            if (position.getX() == dx[player] && position.getY() == dy[player]){//short castle
+                dx = new int[] {3, 0, 10, 13};
+                dy = new int[] {0, 3, 13, 10};
+                Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
+                board[dx[player]][dy[player]].setPiece(new BlankSquare());
+                dx = new int[] {5, 0, 8, 13};
+                dy = new int[] {0, 5, 13, 8};
+                board[dx[player]][dy[player]].setPiece(rook);;
+                System.out.println(rook.getPlayer());
+                System.out.println("Casting");
+            }
+            dx = new int[] {8, 0, 5, 13};
+            dy = new int[] {0, 8, 13, 5};
+            if (position.getX() == dx[player] && position.getY() == dy[player]){//long castle
+                dx = new int[] {10, 0, 3, 13};
+                dy = new int[] {0, 10, 13, 3};
+                Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
+                board[dx[player]][dy[player]].setPiece(new BlankSquare());
+                dx = new int[] {7, 0, 6, 13};
+                dy = new int[] {0, 7, 13, 6};
+                board[dx[player]][dy[player]].setPiece(rook);
+                System.out.println(rook.getPlayer());
+                System.out.println("Casting");
+            }
+            
+        }
         this.hasMoved = true;
     }
     @Override
@@ -72,12 +106,32 @@ public class King extends Piece{
         return new King(this.position, this.player);
     }
     @Override
+    public ArrayList<Position> getAttackingMoves(BoardSquare[][] board){
+        ArrayList<Position> output = new ArrayList<Position>();
+        int[] dx = new int[]{1, -1, 0, 0, 1, 1, -1, -1};
+        int[] dy = new int[]{0, 0, 1, -1, -1, 1, 1, -1};
+        for (int i = 0; i < 8; i++){
+            if (super.inBound(position.getX() + dx[i], position.getY() + dy[i], board) && !board[position.getX() + dx[i]][position.getY() + dy[i]].isNull() && board[position.getX() + dx[i]][position.getY() + dy[i]].getPlayer() != player && !inCheck(board, new Position(position.getX() + dx[i], position.getY() + dy[i]))) output.add(new Position(position.getX() + dx[i], position.getY() + dy[i]));
+        }
+        return output;
+    }
+    @Override
     public ArrayList<Position> getValidMoves(BoardSquare[][] board){
         ArrayList<Position> output = new ArrayList<Position>();
         int[] dx = new int[]{1, -1, 0, 0, 1, 1, -1, -1};
         int[] dy = new int[]{0, 0, 1, -1, -1, 1, 1, -1};
         for (int i = 0; i < 8; i++){
             if (super.inBound(position.getX() + dx[i], position.getY() + dy[i], board) && !board[position.getX() + dx[i]][position.getY() + dy[i]].isNull() && board[position.getX() + dx[i]][position.getY() + dy[i]].getPlayer() != player && !inCheck(board, new Position(position.getX() + dx[i], position.getY() + dy[i]))) output.add(new Position(position.getX() + dx[i], position.getY() + dy[i]));
+        }
+        dx = new int[] {-1, 0, 1, 0};
+        dy = new int[] {0, -1, 0, 1};
+        if (!this.hasMoved()){
+            if (board[this.position.getX() + dx[player]][this.position.getY() + dy[player]].isBlank() && board[this.position.getX() + dx[player] * 2][this.position.getY() + dy[player] * 2].isBlank() && !board[this.position.getX() + dx[player] * 3][this.position.getY() + dy[player] * 3].hasMoved()) output.add(new Position(this.position.getX() + dx[player] * 2, this.position.getY() + dy[player] * 2));
+        }
+        dx = new int[] {1, 0, -1, 0};
+        dy = new int[] {0, 1, 0, -1};
+        if (!this.hasMoved()){
+            if (board[this.position.getX() + dx[player]][this.position.getY() + dy[player]].isBlank() && board[this.position.getX() + dx[player] * 2][this.position.getY() + dy[player] * 2].isBlank() && board[this.position.getX() + dx[player] * 3][this.position.getY() + dy[player] * 3].isBlank() && !board[this.position.getX() + dx[player] * 4][this.position.getY() + dy[player] * 4].hasMoved()) output.add(new Position(this.position.getX() + dx[player] * 2, this.position.getY() + dy[player] * 2));
         }
         return output;
     }

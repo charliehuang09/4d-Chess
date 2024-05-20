@@ -17,7 +17,6 @@ import Piece.BlankSquare;
 import Piece.BoardSquare;
 import Piece.Position;
 import Piece.King;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -91,6 +90,17 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         startGame();
         
         addMouseListener(this);
+
+        int[] dx = {3, 0, 10, 13};
+        int[] dy = {0, 10, 13, 3};
+        for (int i = 0; i < 4; i++){
+            System.out.println(board[dx[i]][dy[i]].getName());
+        }
+        dx = new int[]{10, 0, 3, 13};
+        dy = new int[]{0, 3, 13, 10};
+        for (int i = 0; i < 4; i++){
+            System.out.println(board[dx[i]][dy[i]].getName());
+        }
     
     }
     public void startGame() {
@@ -259,7 +269,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                 board[i][j] = this.board[i][j].clone();
             }
         }
-        board[currentSelect.getX()][currentSelect.getY()].move();
         board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
         board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
         
@@ -267,6 +276,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
         board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
         board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
         board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+        board[nextSelect.getX()][nextSelect.getY()].move(board);
         
         if (board[nextSelect.getX()][nextSelect.getY()].getName().equals("King")) return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board, nextSelect);
         return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
@@ -279,8 +289,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     BoardSquare soundTemp = board[currentSelect.getX()][currentSelect.getY()];
                     
                     points[board[currentSelect.getX()][currentSelect.getY()].getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
-                    board[currentSelect.getX()][currentSelect.getY()].move();
-                    
                     
                     
                     board[nextSelect.getX()][nextSelect.getY()].setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
@@ -291,6 +299,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                     board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
                     board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
                     board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+                    board[nextSelect.getX()][nextSelect.getY()].move(board);
 
                     boolean playCheckSoundKing = false;
                     ArrayList<King> kingsInCheck = new ArrayList<King>();
