@@ -294,7 +294,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()].returnValidMoveSet(currentSelect,board);//getValidMoves(board);
             for (Position move : moves){
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
-                    BoardSquare soundTemp = board[nextSelect.getX()][nextSelect.getY()];
                     
                     int player0Points = points[0];
                     int player1Points = points[1];
@@ -338,11 +337,6 @@ public class Screen extends JPanel implements MouseListener, ActionListener{
                             }
                         }
                     }
-                    //System.out.println("AttackingMoves");
-                    for (Position pos: AttackingMoves) {
-                        //System.out.println(" -" + pos.toString());
-                    }
-                    //System.out.println();
 
                     boolean playCaptureBool = false;
                     if (player0Points < points[0] || player1Points < points[1] || player2Points < points[2] || player3Points < points[3]) {
