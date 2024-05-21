@@ -10,6 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener; 
+import java.awt.event.KeyEvent; 
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -22,7 +24,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Screen extends JPanel implements MouseListener, ActionListener {
+public class Screen extends JPanel implements MouseListener, ActionListener, KeyListener{
     private Board boardClass;
     private BoardSquare[][] board;
     private int x;
@@ -42,32 +44,39 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
     private JLabel ChessLabel;
     private King[] kings;
     private BufferedImage StartGameButtonImage;
+    private BufferedImage MenuButtonImage;
     private int turn;
     private int alive;
     private boolean inMenu;
     private AudioPlayer at;
+    private boolean inCrosshair;
+    private int xCrosshair;
+    private int yCrosshair;
 
     public Screen() {
         setLayout(null);
         setFocusable(true);
+        addKeyListener(this); 
+        addMouseListener(this);
         at = new AudioPlayer();
 
         inMenu = true;
+        inCrosshair = false;
+        xCrosshair = 10;
+        yCrosshair = 10;
 
-        /*
-         * startGameButton = new JButton();
-         * startGameButton.setFont(new Font("Arial", Font.BOLD, 75));
-         * startGameButton.setHorizontalAlignment(SwingConstants.CENTER);
-         * startGameButton.setBounds(539, 469, 350, 70);
-         * startGameButton.setText("Start");
-         * this.add(startGameButton);
-         * startGameButton.addActionListener(this);
-         * startGameButton.setVisible(true);
-         */
+        
 
         String pathStartGameButtonImage = "Assets" + "/" + "Images" + "/" + "StartGame" + ".png";
         try {
             StartGameButtonImage = ImageIO.read(new File(pathStartGameButtonImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String pathMenuButtonImage = "Assets" + "/" + "Images" + "/" + "Menu" + ".png";
+        try {
+            MenuButtonImage = ImageIO.read(new File(pathMenuButtonImage));
         } catch (IOException e) {
             System.out.println("Failed");
         }
@@ -97,7 +106,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
 
         startGame();
 
-        addMouseListener(this);
+        
 
     }
 
@@ -162,6 +171,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
         g.fillRect(0, 0, 1920, 1080);
         if (inMenu == false) {
             drawBoard(g);
+            g.drawImage(MenuButtonImage, 1000, 500, null);
         } else {
             player0Score.setVisible(false);
             player1Score.setVisible(false);
@@ -169,7 +179,20 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
             player3Score.setVisible(false);
             g.drawImage(StartGameButtonImage, 525, 425, null);
         }
+
+
         g.setColor(new Color(0, 0, 0));
+        if (inCrosshair == true) {
+            g.fillRect(0,yCrosshair,1920,1); //y
+            g.fillRect(xCrosshair,0,1,1080); //x
+        }
+        g.setColor(new Color(54,35,16));
+        g.fillRect(0,0,1920,5);
+        g.fillRect(0,787,1920,8);
+        g.fillRect(0,0,5,1080);
+        g.fillRect(1530,0,10,1080);
+        
+        
     }
 
     public void drawBoard(Graphics g) {
@@ -234,6 +257,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
         alive--;
         if (alive == 1) {
             backToMenu.setVisible(true);
+
         }
     }
 
@@ -384,9 +408,26 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
         if (inMenu == true) {
             if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
                 ChessLabel.setVisible(false);
-                backToMenu.setVisible(true);
+                //backToMenu.setVisible(true);
                 inMenu = false;
                 startGame();
+                repaint();
+            }
+        }
+    }
+    public void checkMouseMenuButton(int mX, int mY) {
+        if (inMenu == false) {
+            if ((mX >= 1011 && mX <= 1363) && (mY >= 604 && mY <= 758)) {
+                //backToMenu.setVisible(false);
+                ChessLabel.setVisible(true);
+                player0Score.setVisible(false);
+                player1Score.setVisible(false);
+                player2Score.setVisible(false);
+                player3Score.setVisible(false);
+
+                startGame();
+
+                inMenu = true;
                 repaint();
             }
         }
@@ -420,6 +461,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
             System.out.println("Position is null");
         }
         checkMouseStartButton(mX, mY);
+        checkMouseMenuButton(mX,mY);
         move(); // checks if a move has been made and calculates the resulting change
         repaint();
     }
@@ -447,6 +489,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
             repaint();
         }
         if (e.getSource() == backToMenu) {
+            /* 
             backToMenu.setVisible(false);
             ChessLabel.setVisible(true);
             player0Score.setVisible(false);
@@ -458,6 +501,42 @@ public class Screen extends JPanel implements MouseListener, ActionListener {
 
             inMenu = true;
             repaint();
+            */
+            
         }
+        
     }
+    public void keyPressed(KeyEvent e) { 
+        //use to detect what key is 
+        if (e.getKeyCode() == 67) {
+            inCrosshair = !(inCrosshair);
+        }
+        if (inCrosshair == true) {
+            if (e.getKeyCode()  == 38) { //up
+                yCrosshair -= 5;
+            } else if (e.getKeyCode() == 40) { //down
+                yCrosshair += 5;
+            } else if (e.getKeyCode() == 37) { //left
+                
+                xCrosshair -= 5;
+            } else if (e.getKeyCode() == 39) { //right
+                
+                xCrosshair += 5;
+            } else if (e.getKeyCode()  == 87) { //up
+                yCrosshair -= 1;
+            } else if (e.getKeyCode() == 83) { //down
+                yCrosshair += 1;
+            } else if (e.getKeyCode() == 65) { //left
+                xCrosshair -= 1;
+            } else if (e.getKeyCode() == 68) { //right
+                xCrosshair += 1;
+            }
+            System.out.println("X: " + xCrosshair + " Y: " + yCrosshair);
+        }
+        repaint();
+        
+
+     }
+     public void keyReleased(KeyEvent e) {} 
+     public void keyTyped(KeyEvent e) {} 
 }
