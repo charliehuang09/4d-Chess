@@ -38,13 +38,18 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
-    // private JButton startGameButton;
-    private JButton backToMenu;
+    
+    
     private JButton fastRender;
-    private JLabel ChessLabel;
+    
     private King[] kings;
     private BufferedImage StartGameButtonImage;
+    private int StartGameButtonX;
+    private int StartGameButtonY;
     private BufferedImage MenuButtonImage;
+    private int MenuButtonX;
+    private int MenuButtonY;
+    private BufferedImage ChessLabelImage;
     private int turn;
     private int alive;
     private boolean inMenu;
@@ -64,6 +69,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         inCrosshair = false;
         xCrosshair = 10;
         yCrosshair = 10;
+        StartGameButtonX = 565;
+        StartGameButtonY = 425;
+
+        MenuButtonX = 1011;
+        MenuButtonY = 604;
 
         
 
@@ -81,14 +91,14 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             System.out.println("Failed");
         }
 
-        backToMenu = new JButton();
-        backToMenu.setFont(new Font("Arial", Font.BOLD, 75));
-        backToMenu.setHorizontalAlignment(SwingConstants.CENTER);
-        backToMenu.setBounds(790, 644, 700, 70);
-        backToMenu.setText("Back To Menu");
-        this.add(backToMenu);
-        backToMenu.addActionListener(this);
-        backToMenu.setVisible(false);
+        String PathChessLabelImage = "Assets" + "/" + "Images" + "/" + "ChessLabel" + ".png";
+        try {
+            ChessLabelImage = ImageIO.read(new File(PathChessLabelImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        
 
         fastRender = new JButton();
         fastRender.setFont(new Font("Arial", Font.PLAIN, 10));
@@ -97,12 +107,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         this.add(fastRender);
         fastRender.addActionListener(this);
 
-        ChessLabel = new JLabel();
-        ChessLabel.setFont(new Font("Arial", Font.BOLD, 250));
-        ChessLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        ChessLabel.setBounds(192, 39, 1000, 300);
-        ChessLabel.setText("Chess");
-        this.add(ChessLabel);
+        
+        
 
         startGame();
 
@@ -177,7 +183,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             player1Score.setVisible(false);
             player2Score.setVisible(false);
             player3Score.setVisible(false);
-            g.drawImage(StartGameButtonImage, 525, 425, null);
+            g.drawImage(StartGameButtonImage, StartGameButtonX, StartGameButtonY, null);
+            g.drawImage(ChessLabelImage, 370,120,null);
         }
 
 
@@ -256,7 +263,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         }
         alive--;
         if (alive == 1) {
-            backToMenu.setVisible(true);
+            //
 
         }
     }
@@ -406,8 +413,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
     public void checkMouseStartButton(int mX, int mY) {
         if (inMenu == true) {
-            if ((mX >= 525 && mX <= 900) && (mY >= 425 && mY <= 680)) {
-                ChessLabel.setVisible(false);
+            if ((mX >= StartGameButtonX && mX <= StartGameButtonX + 375) && (mY >= StartGameButtonY && mY <= StartGameButtonY + 255)) {
+                
                 //backToMenu.setVisible(true);
                 inMenu = false;
                 startGame();
@@ -417,9 +424,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
     public void checkMouseMenuButton(int mX, int mY) {
         if (inMenu == false) {
-            if ((mX >= 1011 && mX <= 1363) && (mY >= 604 && mY <= 758)) {
+            if ((mX >= MenuButtonX && mX <= MenuButtonX + 352) && (mY >= MenuButtonY && mY <= MenuButtonY + 154)) {
                 //backToMenu.setVisible(false);
-                ChessLabel.setVisible(true);
+                
                 player0Score.setVisible(false);
                 player1Score.setVisible(false);
                 player2Score.setVisible(false);
@@ -488,22 +495,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             Config.fastRender = !Config.fastRender;
             repaint();
         }
-        if (e.getSource() == backToMenu) {
-            /* 
-            backToMenu.setVisible(false);
-            ChessLabel.setVisible(true);
-            player0Score.setVisible(false);
-            player1Score.setVisible(false);
-            player2Score.setVisible(false);
-            player3Score.setVisible(false);
-
-            startGame();
-
-            inMenu = true;
-            repaint();
-            */
-            
-        }
+        
         
     }
     public void keyPressed(KeyEvent e) { 
