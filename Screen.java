@@ -531,4 +531,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
      }
      public void keyReleased(KeyEvent e) {} 
      public void keyTyped(KeyEvent e) {} 
+
+     public void animate() {
+        while (true) {
+
+
+            try {
+                Thread.sleep(10);
+              } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+              }
+              repaint();
+            repaint();
+        }
+    
+     }
 }
