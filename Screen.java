@@ -57,6 +57,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private boolean inCrosshair;
     private int xCrosshair;
     private int yCrosshair;
+    private boolean startAudio;
 
     public Screen() {
         setLayout(null);
@@ -74,6 +75,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
         MenuButtonX = 1011;
         MenuButtonY = 604;
+
+        startAudio = false;
 
         
 
@@ -411,16 +414,20 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         }
     }
 
-    public void checkMouseStartButton(int mX, int mY) {
+    public boolean checkMouseStartButton(int mX, int mY) {
         if (inMenu == true) {
             if ((mX >= StartGameButtonX && mX <= StartGameButtonX + 375) && (mY >= StartGameButtonY && mY <= StartGameButtonY + 255)) {
                 
                 //backToMenu.setVisible(true);
                 inMenu = false;
                 startGame();
+                at.playStartBoard();
                 repaint();
+                return true;
+                
             }
         }
+        return false;
     }
     public void checkMouseMenuButton(int mX, int mY) {
         if (inMenu == false) {
@@ -433,6 +440,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
                 player3Score.setVisible(false);
 
                 startGame();
+                at.playButtonClick();
 
                 inMenu = true;
                 repaint();
@@ -467,8 +475,12 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         } else {
             System.out.println("Position is null");
         }
+        if (checkMouseStartButton(mX, mY) == true) {
+            startAudio = true;
+        }
         checkMouseStartButton(mX, mY);
         checkMouseMenuButton(mX,mY);
+        startAudio = false;
         move(); // checks if a move has been made and calculates the resulting change
         repaint();
     }
@@ -531,19 +543,4 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
      }
      public void keyReleased(KeyEvent e) {} 
      public void keyTyped(KeyEvent e) {} 
-
-     public void animate() {
-        while (true) {
-
-
-            try {
-                Thread.sleep(10);
-              } catch (InterruptedException ex) {
-                Thread.currentThread().interrupt();
-              }
-              repaint();
-            repaint();
-        }
-    
-     }
 }

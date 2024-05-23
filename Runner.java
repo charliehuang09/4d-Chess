@@ -11,6 +11,5 @@ public class Runner {
         fr.pack();
         fr.setVisible(true);
         
-        sc.animate();
     }
 }
