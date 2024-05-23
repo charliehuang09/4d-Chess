@@ -1,11 +1,17 @@
 package Piece;
 
+import java.awt.image.BufferedImage;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class BlankSquare extends Piece { // a class to represent a square that is empty
     public boolean isValidMove(Position position, BoardSquare[][] board) {
         return false;
+    }
+
+    @Override
+    public BufferedImage getImage(){
+        return null;     
     }
 
     @Override
