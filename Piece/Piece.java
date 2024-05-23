@@ -28,6 +28,8 @@ public abstract class Piece {
 
     public abstract boolean hasMoved();
 
+    public abstract BufferedImage getImage();
+
     public void kill() {
     }
 

@@ -34,7 +34,12 @@ public class Pawn extends Piece {
         }
         this.image = super.resize(image);
     }
-
+    
+    @Override
+    public BufferedImage getImage(){
+        return this.image;     
+    }
+    
     @Override
     public boolean hasMoved() {
         return this.hasMoved;

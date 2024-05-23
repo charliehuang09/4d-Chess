@@ -50,6 +50,11 @@ public class Queen extends Piece {
     }
 
     @Override
+    public BufferedImage getImage(){
+        return this.image;     
+    }
+
+    @Override
     public boolean hasMoved() {
         return this.hasMoved;
     }

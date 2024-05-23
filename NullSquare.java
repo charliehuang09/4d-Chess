@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import Piece.BoardSquare;
 import Piece.Piece;
 import Piece.Position;
+import java.awt.image.BufferedImage;
 
 public class NullSquare extends Piece { // to represent a null square
     private Position position;
+
+    @Override
+    public BufferedImage getImage(){
+        return null;     
+    }
 
     public boolean isValidMove(Position position, BoardSquare[][] board) {
         this.position = position;
