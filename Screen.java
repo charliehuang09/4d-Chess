@@ -70,11 +70,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         inCrosshair = false;
         xCrosshair = 10;
         yCrosshair = 10;
-        StartGameButtonX = 565;
+        StartGameButtonX = 496;
         StartGameButtonY = 425;
 
-        MenuButtonX = 1011;
-        MenuButtonY = 604;
+        MenuButtonX = 956;
+        MenuButtonY = 540;
 
         startAudio = false;
 
@@ -171,23 +171,24 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
 
     public Dimension getPreferredSize() {
-        return new Dimension(1920, 1080);
+        return new Dimension(1355, 790);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(new Color(205, 170, 125));
-        g.fillRect(0, 0, 1920, 1080);
+        g.fillRect(0, 0, 1355, 790);
         if (inMenu == false) {
             drawBoard(g);
-            g.drawImage(MenuButtonImage, 1000, 500, null);
+            System.out.println("MenuButtonY" + MenuButtonY);
+            g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
         } else {
             player0Score.setVisible(false);
             player1Score.setVisible(false);
             player2Score.setVisible(false);
             player3Score.setVisible(false);
             g.drawImage(StartGameButtonImage, StartGameButtonX, StartGameButtonY, null);
-            g.drawImage(ChessLabelImage, 370,120,null);
+            g.drawImage(ChessLabelImage, 285,120,null);
         }
 
 
@@ -197,10 +198,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             g.fillRect(xCrosshair,0,1,1080); //x
         }
         g.setColor(new Color(54,35,16));
-        g.fillRect(0,0,1920,5);
-        g.fillRect(0,787,1920,8);
-        g.fillRect(0,0,5,1080);
-        g.fillRect(1530,0,10,1080);
+        g.fillRect(0,0,1355,5);
+        g.fillRect(0,785,1355,5);
+        g.fillRect(0,0,5,790);
+        g.fillRect(1350,0,5,790);
         
         
     }
@@ -431,7 +432,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
     public void checkMouseMenuButton(int mX, int mY) {
         if (inMenu == false) {
-            if ((mX >= MenuButtonX && mX <= MenuButtonX + 352) && (mY >= MenuButtonY && mY <= MenuButtonY + 154)) {
+            System.out.println("mY: " + mY + "MenuButtonY: "+ MenuButtonY);
+            if ((mX >= MenuButtonX && mX <= MenuButtonX + 355) && (mY >= MenuButtonY && mY <= MenuButtonY + 135)) {
                 //backToMenu.setVisible(false);
                 
                 player0Score.setVisible(false);
@@ -452,6 +454,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
         int mX = e.getX();
         int mY = e.getY();
+        System.out.println(mX + " " + mY);
         Position pos = returnLocation(mX, mY);
         if (pos != null) {
             if (currentSelect == null) {
