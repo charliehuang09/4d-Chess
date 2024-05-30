@@ -20,6 +20,8 @@ import Piece.BoardSquare;
 import Piece.Config;
 import Piece.Position;
 import Piece.King;
+import Piece.Piece;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +65,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private boolean inCrosshair;
     private int xCrosshair;
     private int yCrosshair;
+
+    private Piece animatePiece;
+    private float animateX;
+    private float animageY;
+
+    private int player0Points;
+    private int player1Points;
+    private int player2Points;
+    private int player3Points;
     private boolean startAudio;
 
     public Screen() {
@@ -86,7 +97,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
         startAudio = false;
 
-        
+        animatePiece = null;
 
         String pathStartGameButtonImage = "Assets" + "/" + "Images" + "/" + "StartGame" + ".png";
         try {
@@ -208,6 +219,12 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
                 g.drawImage(OnImage, 1080,105, null);
             } else {
                 g.drawImage(OffImage, 1060, 105, null);
+            }
+
+            if (animatePiece != null){
+                int x = (int) animateX;
+                int y = (int) animageY;
+                g.drawImage(animatePiece.getImage(), y - 20, x - 20, null);
             }
             
 
@@ -344,6 +361,85 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         return !this.kings[board[nextSelect.getX()][nextSelect.getY()].getPlayer()].inCheck(board);
     }
 
+    public void update(float xIncrement, float yIncrement){
+        animateX += xIncrement;
+        animageY += yIncrement;
+    }
+
+    public void finishMove(){
+        System.out.println("Finish Move");
+        board[nextSelect.getX()][nextSelect.getY()].setPiece(animatePiece);
+
+        board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
+        board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
+        board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
+        board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
+        board[nextSelect.getX()][nextSelect.getY()].move(board);
+
+        boolean playCheckSoundKing = false;
+        ArrayList<King> kingsInCheck = new ArrayList<King>();
+        for (King king : kings) {
+            if (king.inCheck(board)) {
+                playCheckSoundKing = true;
+                System.out.println("playChecKsoundking set to true");
+                kingsInCheck.add(king);
+            }
+
+        }
+
+        boolean playCheckSoundValidPiece = false;
+        ArrayList<Position> AttackingMoves = board[nextSelect.getX()][nextSelect.getY()]
+                .getAttackingMoves(board);
+        if (kingsInCheck.size() != 0) {
+            for (int i = 0; i < AttackingMoves.size(); i++) {
+                for (int k = 0; k < kingsInCheck.size(); k++) {
+                    if (kingsInCheck.get(k).getPosition().toString()
+                            .equals(AttackingMoves.get(i).toString())) {
+                        System.out.println("playCheckSoundValidPiece set to true");
+                        playCheckSoundValidPiece = true;
+                    }
+                }
+            }
+        }
+
+        boolean playCaptureBool = false;
+        if (player0Points < points[0] || player1Points < points[1] || player2Points < points[2]
+                || player3Points < points[3]) {
+            playCaptureBool = true;
+        }
+
+        if (playCheckSoundKing == true && playCheckSoundValidPiece == true) {
+            at.playCheck();
+        } else if (playCaptureBool == true) {
+            at.playCapture();
+            System.out.println("Play Capture");
+        } else {
+            at.playMove();
+            System.out.println("Play Move");
+        }
+
+        currentSelect = null;
+        nextSelect = null;
+
+        int tmp = turn;
+        changeTurn();
+        for (King king : kings) {
+            if (king.getPlayer() != tmp && king.getValue() != 0)
+                points[tmp] += checkMateDetection(king);
+        }
+        updateTurn();
+
+        player0Score.setText("Blue: " + points[0]);
+        player1Score.setText("Green: " + points[1]);
+        player2Score.setText("Red: " + points[2]);
+        player3Score.setText("Yellow: " + points[3]);
+
+        animatePiece = null;
+        repaint();
+
+        return;
+    }
+
     public void move() { // successful moving
         if (nextSelect != null) {
             ArrayList<Position> moves = board[currentSelect.getX()][currentSelect.getY()]
@@ -351,82 +447,31 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             for (Position move : moves) {
                 if (move.equals(nextSelect) && isValidMove(currentSelect, nextSelect)) {
 
-                    int player0Points = points[0];
-                    int player1Points = points[1];
-                    int player2Points = points[2];
-                    int player3Points = points[3];
+                    player0Points = points[0];
+                    player1Points = points[1];
+                    player2Points = points[2];
+                    player3Points = points[3];
 
                     points[board[currentSelect.getX()][currentSelect.getY()]
                             .getPlayer()] += board[nextSelect.getX()][nextSelect.getY()].getValue();
 
-                    board[nextSelect.getX()][nextSelect.getY()]
-                            .setPiece(board[currentSelect.getX()][currentSelect.getY()].getPiece());
+
+                    animatePiece = board[currentSelect.getX()][currentSelect.getY()].getPiece();
                     board[currentSelect.getX()][currentSelect.getY()].setPiece(new BlankSquare());
-                    // this must be blank for the valid move system
 
-                    board[currentSelect.getX()][currentSelect.getY()].updatePosition(currentSelect);
-                    board[nextSelect.getX()][nextSelect.getY()].updatePosition(nextSelect);
-                    board[currentSelect.getX()][currentSelect.getY()].changeSelect("clear");
-                    board[nextSelect.getX()][nextSelect.getY()].changeSelect("clear");
-                    board[nextSelect.getX()][nextSelect.getY()].move(board);
+                    animateX = animatePiece.getPosition().getCoordX();
+                    animageY = animatePiece.getPosition().getCoordY();
 
-                    boolean playCheckSoundKing = false;
-                    ArrayList<King> kingsInCheck = new ArrayList<King>();
-                    for (King king : kings) {
-                        if (king.inCheck(board)) {
-                            playCheckSoundKing = true;
-                            System.out.println("playChecKsoundking set to true");
-                            kingsInCheck.add(king);
-                        }
+                    Thread r = new Thread(new Animate(this, currentSelect, nextSelect));
+                    r.start();
+            
+                    // try{
+                    //     r.join(); //wait until t1 is done
+                    // } catch(Exception ex) {
+                    //     System.out.println(ex);
+                    // }
 
-                    }
-
-                    boolean playCheckSoundValidPiece = false;
-                    ArrayList<Position> AttackingMoves = board[nextSelect.getX()][nextSelect.getY()]
-                            .getAttackingMoves(board);
-                    if (kingsInCheck.size() != 0) {
-                        for (int i = 0; i < AttackingMoves.size(); i++) {
-                            for (int k = 0; k < kingsInCheck.size(); k++) {
-                                if (kingsInCheck.get(k).getPosition().toString()
-                                        .equals(AttackingMoves.get(i).toString())) {
-                                    System.out.println("playCheckSoundValidPiece set to true");
-                                    playCheckSoundValidPiece = true;
-                                }
-                            }
-                        }
-                    }
-
-                    boolean playCaptureBool = false;
-                    if (player0Points < points[0] || player1Points < points[1] || player2Points < points[2]
-                            || player3Points < points[3]) {
-                        playCaptureBool = true;
-                    }
-
-                    if (playCheckSoundKing == true && playCheckSoundValidPiece == true) {
-                        at.playCheck();
-                    } else if (playCaptureBool == true) {
-                        at.playCapture();
-                        System.out.println("Play Capture");
-                    } else {
-                        at.playMove();
-                        System.out.println("Play Move");
-                    }
-
-                    currentSelect = null;
-                    nextSelect = null;
-
-                    int tmp = turn;
-                    changeTurn();
-                    for (King king : kings) {
-                        if (king.getPlayer() != tmp && king.getValue() != 0)
-                            points[tmp] += checkMateDetection(king);
-                    }
-                    updateTurn();
-
-                    player0Score.setText("Blue: " + points[0]);
-                    player1Score.setText("Green: " + points[1]);
-                    player2Score.setText("Red: " + points[2]);
-                    player3Score.setText("Yellow: " + points[3]);
+                    return;
 
                 }
             }
@@ -494,6 +539,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
 
     public void mousePressed(MouseEvent e) {
+        if (animatePiece != null) return;
 
         int mX = e.getX();
         int mY = e.getY();
@@ -545,11 +591,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (animatePiece != null) return;
         
-        
+    
         
     }
     public void keyPressed(KeyEvent e) { 
+        if (animatePiece != null) return;
         //use to detect what key is 
         if (e.getKeyCode() == 67) {
             inCrosshair = !(inCrosshair);
