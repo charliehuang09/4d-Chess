@@ -55,6 +55,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private int FastRenderY;
     private BufferedImage OnImage;
     private BufferedImage OffImage;
+    private BufferedImage NamesImage;
     private int turn;
     private int alive;
     private boolean inMenu;
@@ -128,18 +129,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         } catch (IOException e) {
             System.out.println("Failed");
         }
-
-        
-
-        
-
-        
-        
-
         startGame();
 
-        
-
+        String PathNamesImage = "Assets" + "/" + "Images" + "/" + "Names" + ".png";
+        try {
+            NamesImage = ImageIO.read(new File(PathNamesImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+        startGame();
     }
 
     public void startGame() {
@@ -220,6 +218,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             player3Score.setVisible(false);
             g.drawImage(StartGameButtonImage, StartGameButtonX, StartGameButtonY, null);
             g.drawImage(ChessLabelImage, 285,120,null);
+            g.drawImage(NamesImage, 10, 720, null);
         }
 
 
@@ -486,6 +485,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             
             if ((mX >= FastRenderX && mX <= FastRenderX + 350) && (mY >= FastRenderY && mY <= FastRenderY + 80)) {
                 Config.fastRender = !Config.fastRender;
+                at.playButtonClick();
                 repaint();
                 
             }
