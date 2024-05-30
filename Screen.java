@@ -40,7 +40,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private JLabel player1Score;
     
     
-    private JButton fastRender;
+    
     
     private King[] kings;
     private BufferedImage StartGameButtonImage;
@@ -50,6 +50,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private int MenuButtonX;
     private int MenuButtonY;
     private BufferedImage ChessLabelImage;
+    private BufferedImage FastRenderImage;
+    private int FastRenderX;
+    private int FastRenderY;
+    private BufferedImage OnImage;
+    private BufferedImage OffImage;
     private int turn;
     private int alive;
     private boolean inMenu;
@@ -75,6 +80,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
         MenuButtonX = 956;
         MenuButtonY = 540;
+        FastRenderX = 965;
+        FastRenderY = 20;
 
         startAudio = false;
 
@@ -101,14 +108,30 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             System.out.println("Failed");
         }
 
+        String PathFastRenderImage = "Assets" + "/" + "Images" + "/" + "FastRender" + ".png";
+        try {
+            FastRenderImage = ImageIO.read(new File(PathFastRenderImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String PathOnImage = "Assets" + "/" + "Images" + "/" + "On" + ".png";
+        try {
+            OnImage = ImageIO.read(new File(PathOnImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String PathOffImage = "Assets" + "/" + "Images" + "/" + "Off" + ".png";
+        try {
+            OffImage = ImageIO.read(new File(PathOffImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
         
 
-        fastRender = new JButton();
-        fastRender.setFont(new Font("Arial", Font.PLAIN, 10));
-        fastRender.setBounds(1150, 25, 150, 50);
-        fastRender.setText("Turn On Fastrender");
-        this.add(fastRender);
-        fastRender.addActionListener(this);
+        
 
         
         
@@ -178,11 +201,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         super.paintComponent(g);
         g.setColor(new Color(205, 170, 125));
         g.fillRect(0, 0, 1355, 790);
-        if (inMenu == false) {
+        if (inMenu == false) { //in the game
             drawBoard(g);
-            System.out.println("MenuButtonY" + MenuButtonY);
+            //System.out.println("MenuButtonY" + MenuButtonY);
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
-        } else {
+            g.drawImage(FastRenderImage, FastRenderX, FastRenderY, null);
+            if (Config.fastRender == true) {
+                g.drawImage(OnImage, 1080,105, null);
+            } else {
+                g.drawImage(OffImage, 1060, 105, null);
+            }
+            
+
+        } else { //in the menu
             player0Score.setVisible(false);
             player1Score.setVisible(false);
             player2Score.setVisible(false);
@@ -432,7 +463,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
     public void checkMouseMenuButton(int mX, int mY) {
         if (inMenu == false) {
-            System.out.println("mY: " + mY + "MenuButtonY: "+ MenuButtonY);
+            
             if ((mX >= MenuButtonX && mX <= MenuButtonX + 355) && (mY >= MenuButtonY && mY <= MenuButtonY + 135)) {
                 //backToMenu.setVisible(false);
                 
@@ -449,6 +480,18 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             }
         }
     }
+
+    public void checkMouseFastRenderButton(int mX, int mY) {
+        if (inMenu == false) {
+            
+            if ((mX >= FastRenderX && mX <= FastRenderX + 350) && (mY >= FastRenderY && mY <= FastRenderY + 80)) {
+                Config.fastRender = !Config.fastRender;
+                repaint();
+                
+            }
+        }
+    }
+
 
     public void mousePressed(MouseEvent e) {
 
@@ -483,6 +526,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         }
         checkMouseStartButton(mX, mY);
         checkMouseMenuButton(mX,mY);
+        checkMouseFastRenderButton(mX,mY);
         startAudio = false;
         move(); // checks if a move has been made and calculates the resulting change
         repaint();
@@ -501,15 +545,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == fastRender) {
-            if (Config.fastRender == true) {
-                fastRender.setText("Turn On Fastrender");
-            } else {
-                fastRender.setText("Turn Off Fastrender");
-            }
-            Config.fastRender = !Config.fastRender;
-            repaint();
-        }
+        
         
         
     }
