@@ -40,6 +40,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private JLabel player3Score;
     private JLabel player2Score;
     private JLabel player1Score;
+    private boolean inInstructions;
     
     
     
@@ -80,6 +81,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private boolean startAudio;
 
     public Screen() {
+        inInstructions = false;
         setLayout(null);
         setFocusable(true);
         addKeyListener(this); 
@@ -223,7 +225,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         super.paintComponent(g);
         g.setColor(new Color(205, 170, 125));
         g.fillRect(0, 0, 1355, 790);
-        if (inMenu == false) { //in the game
+        if (inInstructions){
+        }
+        else if (inMenu == false) { //in the game
             drawBoard(g);
             //System.out.println("MenuButtonY" + MenuButtonY);
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
@@ -264,6 +268,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         g.fillRect(0,785,1355,5);
         g.fillRect(0,0,5,790);
         g.fillRect(1350,0,5,790);
+
+        if (inInstructions){
+            Font font = new Font("Arial", Font.PLAIN, 25);
+            g.setFont(font);
+            g.drawString(Config.rules[0], 150, 150);
+            g.drawString(Config.rules[1], 200, 225);
+            g.drawString(Config.rules[2], 200, 250);
+            g.drawString(Config.rules[3], 200, 275);
+            g.drawString(Config.rules[4], 200, 300);
+            g.drawString(Config.rules[5], 200, 325);
+            g.drawString(Config.rules[6], 200, 350);
+            g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
+        }
         
         
     }
@@ -556,7 +573,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     public void checkMouseInstructionsButton(int mX, int mY) {
         if (inMenu == false) {
             if ((mX >= InstructionsX && mX <= InstructionsX + 319) && (mY >= InstructionsY && mY <= InstructionsY + 45)) {
-                //code needed
+                inInstructions = !inInstructions;
 
 
                 at.playButtonClick();
