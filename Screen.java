@@ -555,11 +555,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
     public void checkMouseInstructionsButton(int mX, int mY) {
         if (inMenu == false) {
-            
             if ((mX >= InstructionsX && mX <= InstructionsX + 319) && (mY >= InstructionsY && mY <= InstructionsY + 45)) {
                 //code needed
 
-                
+
+                at.playButtonClick();
                 repaint();
                 
             }
