@@ -604,6 +604,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         checkMouseStartButton(mX, mY);
         checkMouseMenuButton(mX,mY);
         checkMouseFastRenderButton(mX,mY);
+        checkMouseInstructionsButton(mX,mY);
         startAudio = false;
         move(); // checks if a move has been made and calculates the resulting change
         repaint();
