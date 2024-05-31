@@ -172,7 +172,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         player0Score = new JLabel();
         player0Score.setFont(new Font("Arial", Font.BOLD, 35));
         player0Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player0Score.setBounds(tempX + -20, tempY + 650, 200, 30);
+        player0Score.setBounds(tempX + -20, tempY + 556, 200, 30);
         player0Score.setText("Blue: " + points[0]);
         this.add(player0Score);
         player0Score.setVisible(false);
@@ -180,7 +180,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         player1Score = new JLabel();
         player1Score.setFont(new Font("Arial", Font.BOLD, 35));
         player1Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player1Score.setBounds(tempX - 20, tempY + 40, 200, 30);
+        player1Score.setBounds(tempX - 27, tempY + 115, 200, 30);
         player1Score.setText("Green: " + points[1]);
         this.add(player1Score);
         player1Score.setVisible(false);
@@ -188,7 +188,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         player2Score = new JLabel();
         player2Score.setFont(new Font("Arial", Font.BOLD, 35));
         player2Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player2Score.setBounds(tempX + 575, tempY + 70, 200, 30);
+        player2Score.setBounds(tempX + 535, tempY + 115, 200, 30);
         player2Score.setText("Red: " + points[2]);
         this.add(player2Score);
         player2Score.setVisible(false);
@@ -196,7 +196,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         player3Score = new JLabel();
         player3Score.setFont(new Font("Arial", Font.BOLD, 35));
         player3Score.setHorizontalAlignment(SwingConstants.CENTER);
-        player3Score.setBounds(tempX + 575, tempY + 575, 200, 30);
+        player3Score.setBounds(tempX + 536, tempY + 556, 200, 30);
         player3Score.setText("Yellow: " + points[3]);
         this.add(player3Score);
         player3Score.setVisible(false);
