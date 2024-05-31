@@ -58,6 +58,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private BufferedImage OnImage;
     private BufferedImage OffImage;
     private BufferedImage NamesImage;
+    private BufferedImage InstructionsImage;
+    private int InstructionsX;
+    private int InstructionsY;
     private int turn;
     private int alive;
     private boolean inMenu;
@@ -94,6 +97,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         MenuButtonY = 540;
         FastRenderX = 965;
         FastRenderY = 20;
+        InstructionsX = 20;
+        InstructionsY =730;
 
         startAudio = false;
 
@@ -140,11 +145,19 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         } catch (IOException e) {
             System.out.println("Failed");
         }
-        startGame();
+        
 
         String PathNamesImage = "Assets" + "/" + "Images" + "/" + "Names" + ".png";
         try {
             NamesImage = ImageIO.read(new File(PathNamesImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+        
+
+        String PathInstructionImage = "Assets" + "/" + "Images" + "/" + "Instructions" + ".png";
+        try {
+            InstructionsImage = ImageIO.read(new File(PathInstructionImage));
         } catch (IOException e) {
             System.out.println("Failed");
         }
@@ -215,11 +228,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             //System.out.println("MenuButtonY" + MenuButtonY);
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
             g.drawImage(FastRenderImage, FastRenderX, FastRenderY, null);
+            g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
             if (Config.fastRender == true) {
                 g.drawImage(OnImage, 1080,105, null);
             } else {
                 g.drawImage(OffImage, 1060, 105, null);
             }
+
 
             if (animatePiece != null){
                 int x = (int) animateX;
@@ -536,6 +551,22 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             }
         }
     }
+
+
+    public void checkMouseInstructionsButton(int mX, int mY) {
+        if (inMenu == false) {
+            
+            if ((mX >= InstructionsX && mX <= InstructionsX + 319) && (mY >= InstructionsY && mY <= InstructionsY + 45)) {
+                //code needed
+
+                
+                repaint();
+                
+            }
+        }
+    }
+
+
 
 
     public void mousePressed(MouseEvent e) {
