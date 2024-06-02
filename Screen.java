@@ -226,13 +226,23 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         g.setColor(new Color(205, 170, 125));
         g.fillRect(0, 0, 1355, 790);
         if (inInstructions){
+            player0Score.setVisible(false);
+            player1Score.setVisible(false);
+            player2Score.setVisible(false);
+            player3Score.setVisible(false);
         }
         else if (inMenu == false) { //in the game
+            player0Score.setVisible(true);
+            player1Score.setVisible(true);
+            player2Score.setVisible(true);
+            player3Score.setVisible(true);
             drawBoard(g);
             //System.out.println("MenuButtonY" + MenuButtonY);
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
             g.drawImage(FastRenderImage, FastRenderX, FastRenderY, null);
             g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
+            System.out.println(InstructionsX);
+            System.out.println(InstructionsY);
             if (Config.fastRender == true) {
                 g.drawImage(OnImage, 1080,105, null);
             } else {
