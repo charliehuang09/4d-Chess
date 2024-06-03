@@ -59,6 +59,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private BufferedImage OffImage;
     private BufferedImage NamesImage;
     private BufferedImage InstructionsImage;
+    private BufferedImage RedImage;
+    private BufferedImage BlueImage;
+    private BufferedImage YellowImage;
+    private BufferedImage GreenImage;
+    
     private int InstructionsX;
     private int InstructionsY;
     private int turn;
@@ -161,6 +166,35 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         } catch (IOException e) {
             System.out.println("Failed");
         }
+
+        String PathRedImage = "Assets" + "/" + "Images" + "/" + "Red" + ".png";
+        try {
+            RedImage = ImageIO.read(new File(PathRedImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String PathGreenImage = "Assets" + "/" + "Images" + "/" + "Green" + ".png";
+        try {
+            GreenImage = ImageIO.read(new File(PathGreenImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String PathBlueImage = "Assets" + "/" + "Images" + "/" + "Blue" + ".png";
+        try {
+            BlueImage = ImageIO.read(new File(PathBlueImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
+        String PathYellowImage = "Assets" + "/" + "Images" + "/" + "Yellow" + ".png";
+        try {
+            YellowImage = ImageIO.read(new File(PathYellowImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
         startGame();
     }
 
@@ -229,6 +263,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
             g.drawImage(FastRenderImage, FastRenderX, FastRenderY, null);
             g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
+            if (turn == 0) {
+                g.drawImage(BlueImage, 20,20, null);
+            } else if (turn == 1) {
+                g.drawImage(GreenImage,20,20,null);
+            } else if(turn == 2) {
+                g.drawImage(RedImage,20,20,null);
+            } else if (turn == 3) {
+                g.drawImage(YellowImage,20,20,null);
+            }
             if (Config.fastRender == true) {
                 g.drawImage(OnImage, 1080,105, null);
             } else {
