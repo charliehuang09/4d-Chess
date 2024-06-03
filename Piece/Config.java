@@ -11,7 +11,7 @@ public class Config {
       "  - Pawns that promote are still only worth one point when caputured",
       "3. When a player gets checkmated, their peices value all go to"
     };
-    public static int animateFrames = 100;
-    public static long waitMS = 1;
+    public static float animateFrames = 100;
+    public static long waitMS = 5;
 
 }
