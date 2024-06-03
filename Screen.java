@@ -64,7 +64,9 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private BufferedImage BlueImage;
     private BufferedImage YellowImage;
     private BufferedImage GreenImage;
-    
+    private BufferedImage FramesImage;
+    private int FramesX;
+    private int FramesY;
     private int InstructionsX;
     private int InstructionsY;
     private int turn;
@@ -110,6 +112,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         FastRenderY = 20;
         InstructionsX = 20;
         InstructionsY =730;
+        FramesX = 0;
+        FramesY = 0;
 
         startAudio = false;
 
@@ -201,6 +205,13 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             System.out.println("Failed");
         }
 
+        String PathFramesImage = "Assets" + "/" + "Images" + "/" + "Frames" + ".png";
+        try {
+            FramesImage = ImageIO.read(new File(PathFramesImage));
+        } catch (IOException e) {
+            System.out.println("Failed");
+        }
+
         startGame();
     }
 
@@ -280,6 +291,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             g.drawImage(MenuButtonImage, MenuButtonX, MenuButtonY, null);
             g.drawImage(FastRenderImage, FastRenderX, FastRenderY, null);
             g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
+            g.drawImage(FramesImage, FramesX, FramesY, null);
             if (turn == 0) {
                 g.drawImage(BlueImage, 20,20, null);
             } else if (turn == 1) {
@@ -593,6 +605,15 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
                 repaint();
                 return true;
                 
+            }
+        }
+        return false;
+    }
+    public boolean checkMouseStartButton(int mX, int mY) {
+        if (inMenu == false) {
+            if ((mX >= FramesX && mX <= FramesX + 375) && (mY >= FramesY && mY <= FramesY + 255)) {
+                
+                repaint();
             }
         }
         return false;
