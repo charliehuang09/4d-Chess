@@ -22,7 +22,7 @@ import Piece.Position;
 import Piece.King;
 import Piece.Piece;
 
-import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImage; //517,545 //815,622
 import java.io.File;
 import java.io.IOException;
 
@@ -112,8 +112,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         FastRenderY = 20;
         InstructionsX = 20;
         InstructionsY =730;
-        FramesX = 0;
-        FramesY = 0;
+        FramesX = 990;
+        FramesY = 180;
 
         startAudio = false;
 
@@ -624,10 +624,11 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         }
         return false;
     }
-    public boolean checkMouseStartButton(int mX, int mY) {
+    public boolean checkMouseFramesButton(int mX, int mY) {
         if (inMenu == false) {
-            if ((mX >= FramesX && mX <= FramesX + 375) && (mY >= FramesY && mY <= FramesY + 255)) {
-                
+            if ((mX >= FramesX && mX <= FramesX + 298) && (mY >= FramesY && mY <= FramesY + 77)) {
+                cycleButton();
+                at.playButtonClick();
                 repaint();
             }
         }
@@ -718,6 +719,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         checkMouseMenuButton(mX,mY);
         checkMouseFastRenderButton(mX,mY);
         checkMouseInstructionsButton(mX,mY);
+        checkMouseFramesButton(mX,mY);
         startAudio = false;
         move(); // checks if a move has been made and calculates the resulting change
         repaint();
