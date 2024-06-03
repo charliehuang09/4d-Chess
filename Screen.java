@@ -80,6 +80,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     private int player3Points;
     private boolean startAudio;
 
+    private String winString;
+
     public Screen() {
         inInstructions = false;
         setLayout(null);
@@ -87,6 +89,8 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         addKeyListener(this); 
         addMouseListener(this);
         at = new AudioPlayer();
+
+        winString = "";
 
         inMenu = true;
         inCrosshair = false;
@@ -167,6 +171,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
     }
 
     public void startGame() {
+        winString = "";
         alive = 4;
         turn = 3; // RED ALWAYS GOES FIRST
 
@@ -291,6 +296,10 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
             g.drawString(Config.rules[6], 200, 350);
             g.drawImage(InstructionsImage, InstructionsX, InstructionsY, null);
         }
+
+        Font font = new Font("Arial", Font.PLAIN, 100);
+        g.setFont(font);
+        g.drawString(winString, 400, 400);
         
         
     }
@@ -356,7 +365,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         }
         alive--;
         if (alive == 1) {
-            //
+            winString = "Gamer Over!";
 
         }
     }

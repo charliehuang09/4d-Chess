@@ -12,6 +12,6 @@ public class Config {
       "3. When a player gets checkmated, their peices value all go to"
     };
     public static int animateFrames = 100;
-    public static long waitMS = 10;
+    public static long waitMS = 1;
 
 }
