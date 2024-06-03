@@ -271,6 +271,21 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         return new Dimension(1355, 790);
     }
 
+    public void oneButton(){
+        Config.waitMS = 1;
+    }
+    public void fiveButton(){
+        Config.waitMS = 5;
+    }
+    public void tenButton(){
+        Config.waitMS = 10;
+    }
+    public void cycleButton(){
+        if (Config.waitMS == 1) Config.waitMS = 5;
+        else if (Config.waitMS == 5) Config.waitMS = 10;
+        else if (Config.waitMS == 10) Config.waitMS = 1;
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(new Color(205, 170, 125));
