@@ -440,6 +440,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
 
     public int checkMateDetection(King king) {
         if (king.inCheck(board)) {
+            System.out.println("In Check");
             for (int i = 0; i < this.board.length; i++) {
                 for (int j = 0; j < this.board[i].length; j++) {
                     if (this.board[i][j].getPlayer() == king.getPlayer()) {
@@ -453,6 +454,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
                 }
             }
             kill(king.getPlayer());
+            System.out.println("Checkmate");
             return 20;
         }
         return 0;

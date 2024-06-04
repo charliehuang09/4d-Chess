@@ -56,22 +56,28 @@ public class King extends Piece {
             if (position.getX() == dx[player] && position.getY() == dy[player]) {// short castle
                 dx = new int[] { 3, 0, 10, 13 };
                 dy = new int[] { 0, 3, 13, 10 };
-                Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
-                board[dx[player]][dy[player]].setPiece(new BlankSquare());
-                dx = new int[] { 5, 0, 8, 13 };
-                dy = new int[] { 0, 5, 13, 8 };
-                board[dx[player]][dy[player]].setPiece(rook);
+                if (board[dx[player]][dy[player]].getPiece().getName() == "Rook"){
+                    Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
+                    board[dx[player]][dy[player]].setPiece(new BlankSquare());
+                    dx = new int[] { 5, 0, 8, 13 };
+                    dy = new int[] { 0, 5, 13, 8 };
+                    board[dx[player]][dy[player]].setPiece(rook);
+                    board[dx[player]][dy[player]].updatePosition(new Position(dx[player], dy[player]));
+                }
             }
             dx = new int[] { 8, 0, 5, 13 };
             dy = new int[] { 0, 8, 13, 5 };
             if (position.getX() == dx[player] && position.getY() == dy[player]) {// long castle
                 dx = new int[] { 10, 0, 3, 13 };
                 dy = new int[] { 0, 10, 13, 3 };
-                Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
-                board[dx[player]][dy[player]].setPiece(new BlankSquare());
-                dx = new int[] { 7, 0, 6, 13 };
-                dy = new int[] { 0, 7, 13, 6 };
-                board[dx[player]][dy[player]].setPiece(rook);
+                if (board[dx[player]][dy[player]].getName() == "Rook"){
+                    Rook rook = (Rook) board[dx[player]][dy[player]].getPiece();
+                    board[dx[player]][dy[player]].setPiece(new BlankSquare());
+                    dx = new int[] { 7, 0, 6, 13 };
+                    dy = new int[] { 0, 7, 13, 6 };
+                    board[dx[player]][dy[player]].setPiece(rook);
+                    board[dx[player]][dy[player]].updatePosition(new Position(dx[player], dy[player]));
+                }
             }
 
         }
