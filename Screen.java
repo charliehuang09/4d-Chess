@@ -113,7 +113,7 @@ public class Screen extends JPanel implements MouseListener, ActionListener, Key
         InstructionsX = 20;
         InstructionsY =730;
         FramesX = 990;
-        FramesY = 180;
+        FramesY = 185;
 
         startAudio = false;
 
